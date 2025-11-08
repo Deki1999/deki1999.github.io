@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dejan • Projects</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body>
+  <header class="top">
+    <h1 class="fade-in">Dejan Stevanović</h1>
+    <button id="theme" class="fade-in d2">Dark</button>
+  </header>
+
+  <section class="hero fade-in d1">
+    <img class="avatar" src="https://github.com/Deki1999.png" alt="Avatar" />
+    <div class="hero-text">
+      <h2>Hello! 👋</h2>
+      <p>Beginner Web Developer focused on <strong>HTML/CSS/JavaScript</strong>. Building small, polished projects and shipping them on GitHub Pages.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#projects">View projects</a>
+        <a class="btn ghost" href="https://github.com/Deki1999" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <p class="tagline fade-in d2">Projects · Practice · Progress</p>
+
+  <section id="projects" class="grid">
+    <article class="card reveal">
+      <h2>Typing Test</h2>
+      <p>Live WPM & Accuracy, 10/30/60s, pause/resume, progress bar, sound toggle.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/typing-test/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/typing-test">Code</a>
+      </div>
+    </article>
+
+    <article class="card reveal d1">
+      <h2>Weather App</h2>
+      <p>Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/weather-app/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/weather-app">Code</a>
+      </div>
+    </article>
+
+    <article class="card reveal d2">
+      <h2>Notes App</h2>
+      <p>CRUD, tags, colors, pin, search/sort, export/import, markdown, undo/redo.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/notes-app/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/notes-app">Code</a>
+      </div>
+    </article>
+  </section>
+
+  <section id="contact" class="contact reveal">
+    <h2>Contact me</h2>
+    <p class="muted">Feel free to reach out — I’ll reply as soon as I can.</p>
+    <form id="contactForm" class="form">
+      <div class="row">
+        <input id="name"   placeholder="Your name" required />
+        <input id="email"  type="email" placeholder="Your email" required />
+      </div>
+      <textarea id="message" placeholder="Your message…" rows="5" required></textarea>
+      <div class="row end">
+        <button type="submit" class="btn">Send</button>
+        <a class="btn ghost" href="mailto:stevanovicdejange999@gmail.com">Open email</a>
+      </div>
+      <div id="formTip" class="tip" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <footer class="foot">
+    <div class="links">
+      <a target="_blank" href="https://github.com/Deki1999">GitHub</a>
+      <a target="_blank" href="https://www.linkedin.com/">LinkedIn</a>
+    </div>
+    <small>© <span id="year"></span> Dejan • Built with vanilla HTML/CSS/JS</small>
+  </footer>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
