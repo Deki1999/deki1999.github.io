@@ -366,13 +366,13 @@ window.addEventListener("scroll", updateToTopBtn);
   const get = () => localStorage.getItem(KEY) || 'dark';
   const apply = (t) => {
     root.setAttribute('data-theme', t);
-    const btn = document.getElementById('theme__single');
+    const btn = document.querySelector('#theme, #theme__single, [data-theme-toggle]');
     if (btn) btn.textContent = t === 'dark' ? 'Dark' : 'Light';
   };
   const set = (t) => { localStorage.setItem(KEY, t); apply(t); };
 
   // Ensure one button exists
-  let btn = document.getElementById('theme__single');
+  let btn = document.querySelector('#theme, #theme__single, [data-theme-toggle]');
   if (!btn) {
     btn = document.createElement('button');
     btn.id = 'theme__single';
