@@ -4,69 +4,56 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dejan • Projects</title>
+  <meta name="description" content="Beginner Web Developer — HTML/CSS/JavaScript. Small, polished projects deployed on GitHub Pages." />
+  <meta name="theme-color" content="#0f172a" />
+  <meta property="og:title" content="Dejan • Projects" />
+  <meta property="og:description" content="Beginner Web Developer — HTML/CSS/JavaScript. Small, polished projects deployed on GitHub Pages." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://deki1999.github.io/" />
+  <meta property="og:image" content="https://github.com/Deki1999.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Dejan • Projects" />
+  <meta name="twitter:description" content="Beginner Web Developer — HTML/CSS/JavaScript." />
+  <meta name="twitter:image" content="https://github.com/Deki1999.png" />
   <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" href="data:," />
 </head>
 <body>
-  <header class="top">
-    <h1 class="fade-in">Dejan Stevanović</h1>
-    <button id="theme" class="fade-in d2">Dark</button>
+  <header class="top reveal">
+    <h1>Dejan Stevanović</h1>
+    <button id="theme" class="btn">Dark</button>
   </header>
 
-  <section class="hero fade-in d1">
-    <img class="avatar" src="https://github.com/Deki1999.png" alt="Avatar" />
-    <div class="hero-text">
-      <h2>Hello! 👋</h2>
-      <p>Beginner Web Developer focused on <strong>HTML/CSS/JavaScript</strong>. Building small, polished projects and shipping them on GitHub Pages.</p>
-      <div class="hero-actions">
+  <section class="hero reveal">
+    <img class="avatar" src="https://github.com/Deki1999.png" alt="Dejan’s avatar" />
+    <div>
+      <p class="muted">
+        Beginner Web Developer focused on <strong>HTML/CSS/JavaScript</strong>. Building small, polished projects and shipping them on GitHub Pages.
+      </p>
+      <div class="links">
         <a class="btn" href="#projects">View projects</a>
         <a class="btn ghost" href="https://github.com/Deki1999" target="_blank">GitHub</a>
       </div>
     </div>
   </section>
 
-  <p class="tagline fade-in d2">Projects · Practice · Progress</p>
-
-  <section id="projects" class="grid">
-    <article class="card reveal">
-      <h2>Typing Test</h2>
-      <p>Live WPM & Accuracy, 10/30/60s, pause/resume, progress bar, sound toggle.</p>
-      <div class="actions">
-        <a class="btn" target="_blank" href="https://deki1999.github.io/typing-test/">Live</a>
-        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/typing-test">Code</a>
-      </div>
-    </article>
-
-    <article class="card reveal d1">
-      <h2>Weather App</h2>
-      <p>Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.</p>
-      <div class="actions">
-        <a class="btn" target="_blank" href="https://deki1999.github.io/weather-app/">Live</a>
-        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/weather-app">Code</a>
-      </div>
-    </article>
-
-    <article class="card reveal d2">
-      <h2>Notes App</h2>
-      <p>CRUD, tags, colors, pin, search/sort, export/import, markdown, undo/redo.</p>
-      <div class="actions">
-        <a class="btn" target="_blank" href="https://deki1999.github.io/notes-app/">Live</a>
-        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/notes-app">Code</a>
-      </div>
-    </article>
-  </section>
+  <main id="projects" class="grid">
+    <!-- tvoje project kartice ovde (ostaju kako jesu) -->
+  </main>
 
   <section id="contact" class="contact reveal">
     <h2>Contact me</h2>
     <p class="muted">Feel free to reach out — I’ll reply as soon as I can.</p>
-    <form id="contactForm" action="https://formspree.io/f/mwpaeqrj" method="POST" action="https://formspree.io/f/mwpaeqrj" method="POST" class="form">
+
+    <form id="contactForm" class="form" action="https://formspree.io/f/mwpaeqrj" method="POST" novalidate>
       <div class="row">
-        <input id="name" name="name"   placeholder="Your name" required />
-        <input id="email" name="email"  type="email" placeholder="Your email" required />
+        <input id="name"    name="name"    placeholder="Your name" required />
+        <input id="email"   name="email"   type="email" placeholder="Your email" required />
       </div>
       <textarea id="message" name="message" placeholder="Your message…" rows="5" required></textarea>
+      <input type="hidden" name="_replyto" id="replyTo" />
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
       <div class="row end">
-        <button type="submit" class="btn">Send</button>
+        <button type="submit" class="btn" id="sendBtn">Send</button>
         <a class="btn ghost" href="mailto:stevanovicdejange999@gmail.com">Open email</a>
       </div>
       <div id="formTip" class="tip" role="status" aria-live="polite"></div>
@@ -74,13 +61,12 @@
   </section>
 
   <footer class="foot">
-    <div class="links">
-      <a target="_blank" href="https://github.com/Deki1999">GitHub</a>
-      <a target="_blank" href="https://www.linkedin.com/">LinkedIn</a>
-    </div>
-    <small>© <span id="year"></span> Dejan • Built with vanilla HTML/CSS/JS</small>
+    <p class="muted">© <span id="year"></span> Dejan · Built with vanilla HTML/CSS/JS</p>
   </footer>
 
-  <script src="./app.js" type="module"></script>
+  <button id="toTop" class="btn to-top" aria-label="Back to top">↑ Top</button>
+
+  <!-- cache-bust param da povuče novi JS -->
+  <script src="./app.js?v=pushFix"></script>
 </body>
 </html>
