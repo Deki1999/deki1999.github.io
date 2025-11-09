@@ -242,3 +242,51 @@ document.addEventListener('click', (e) => {
     console.log('THEME =>', nxt);
   }, true);
 })();
+// --- Theme toggle (robust, single-source-of-truth) ---
+(function () {
+  if (window.__themeInit) return; window.__themeInit = true;
+
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  function getPref() {
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) return saved;
+    } catch (_) {}
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+  function labelFor(t) { return t === 'dark' ? 'Light' : 'Dark'; }
+
+  function apply(t) {
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem(KEY, t); } catch (_) {}
+    const b = document.getElementById('theme');
+    if (b) b.textContent = labelFor(t);
+  }
+
+  function toggle() {
+    const cur = root.getAttribute('data-theme') || 'dark';
+    apply(cur === 'dark' ? 'light' : 'dark');
+  }
+
+  // Init na load
+  apply(getPref());
+
+  // Direktno veži ako postoji
+  const btnNow = document.getElementById('theme');
+  if (btnNow && !btnNow.dataset.bound) {
+    btnNow.addEventListener('click', toggle);
+    btnNow.dataset.bound = '1';
+  }
+
+  // Fallback delegacija (ako se dugme kasnije rerendera)
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('#theme,[data-theme-toggle]');
+    if (t && !t.dataset.bound) {
+      t.addEventListener('click', toggle, { once: false });
+      t.dataset.bound = '1';
+    }
+  });
+})();
+ // --- end theme toggle ---
