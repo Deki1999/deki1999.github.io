@@ -389,3 +389,40 @@ window.addEventListener("scroll", updateToTopBtn);
     set(get() === 'dark' ? 'light' : 'dark');
   });
 })();
+
+/* === THEME FIX (robust) === */
+(() => {
+  const THEME_KEY = 'site.theme';
+
+  const getBtn = () => document.querySelector('#theme');
+  const getTheme = () => localStorage.getItem(THEME_KEY) || 'dark';
+  const setTheme = (t) => {
+    document.documentElement.setAttribute('data-theme', t);
+    const btn = getBtn();
+    if (btn) btn.textContent = (t === 'dark') ? 'Light' : 'Dark'; // pokazuj šta će biti
+  };
+
+  // inicijalizacija
+  let theme = getTheme();
+  setTheme(theme);
+
+  // klik direktno na dugme (ako postoji trenutno)
+  const btnNow = getBtn();
+  if (btnNow && !btnNow.dataset._bound) {
+    btnNow.dataset._bound = '1';
+    btnNow.addEventListener('click', () => {
+      theme = (theme === 'dark') ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, theme);
+      setTheme(theme);
+    });
+  }
+
+  // delegacija (u slučaju da se dugme dinamički doda)
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'theme') {
+      theme = (getTheme() === 'dark') ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, theme);
+      setTheme(theme);
+    }
+  });
+})();

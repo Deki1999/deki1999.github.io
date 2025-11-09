@@ -235,3 +235,16 @@ body{background:var(--bg);color:var(--text)}
   color: var(--text); opacity: .9; border-radius: 10px; padding: 6px 10px;
 }
 #theme__single.theme-toggle:hover{ opacity: 1; }
+
+/* === THEME VARS (failsafe) === */
+:root{
+  --bg:#0f1420;--text:#e6eefc;--muted:#a6b3c2;
+  --card:#151e31;--accent:#4db3ff;--border:#223146;
+}
+[data-theme="light"]{
+  --bg:#ffffff;--text:#0d2137;--muted:#58677a;
+  --card:#f3f6fb;--accent:#0cb2ff;--border:#d5e1ef;
+}
+body{background:var(--bg);color:var(--text);}
+.card{background:var(--card);border:1px solid var(--border);}
+.btn{border:1px solid var(--border);}
