@@ -171,3 +171,11 @@ body{background:var(--bg);color:var(--text);}
 /* theme toggle button */
 .theme-toggle{position:fixed;top:16px;right:16px;padding:6px 10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);opacity:.9;transition:opacity .15s}
 .theme-toggle:hover{opacity:1}
+
+/* Theme variables (failsafe) */
+:root{--bg:#0b1420;--text:#e6eefc;--muted:#9bb0c9;--surface:#152131;--card:#101a28;--border:#223146;--accent:#4da3ff}
+html[data-theme="light"]{--bg:#f7fbff;--text:#0c1a2b;--muted:#3d5875;--surface:#ffffff;--card:#f1f6fb;--border:#d5e1f0;--accent:#1b6fff}
+body{background:var(--bg);color:var(--text)}
+
+.theme-toggle{position:fixed;top:16px;right:16px;padding:6px 10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);opacity:.9;transition:opacity .15s}
+.theme-toggle:hover{opacity:1}

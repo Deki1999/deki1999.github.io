@@ -92,3 +92,43 @@ window.addEventListener("scroll", updateToTopBtn);
     apply(theme);
   });
 })();
+
+/* ===== Improved theme wiring (multi-button safe) ===== */
+(() => {
+  if (window.__THEME_WIRED__) return; window.__THEME_WIRED__ = true;
+
+  const KEY  = 'site.theme';
+  const root = document.documentElement;
+
+  // Pronađi SVA moguća toggle dugmad
+  const getToggles = () => {
+    const set = new Set([
+      ...document.querySelectorAll('#theme, .theme-toggle, [data-theme-toggle]')
+    ]);
+    // Heuristika: svako <button> koje piše "Dark" ili "Light"
+    document.querySelectorAll('button').forEach(b => {
+      const t = (b.textContent || '').trim().toLowerCase();
+      if (t === 'dark' || t === 'light') set.add(b);
+    });
+    return Array.from(set);
+  };
+
+  const apply = (theme) => {
+    root.setAttribute('data-theme', theme);
+    getToggles().forEach(b => {
+      b.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    });
+  };
+
+  let theme = localStorage.getItem(KEY) || root.getAttribute('data-theme') || 'dark';
+  apply(theme);
+
+  getToggles().forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.preventDefault?.();
+      theme = theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem(KEY, theme);
+      apply(theme);
+    });
+  });
+})();
