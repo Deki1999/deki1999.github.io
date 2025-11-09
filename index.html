@@ -16,9 +16,7 @@
       <a class="btn" href="#projects">View projects</a>
       <a class="btn ghost" href="https://github.com/Deki1999" target="_blank">GitHub</a>
     </div>
-    <button id="themeBtn" class="theme-btn">Dark</button>
   </header>
-
   <section id="projects" class="grid reveal">
     <article class="card">
       <h2>Typing Test</h2>
@@ -28,7 +26,6 @@
         <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/typing-test">Code</a>
       </div>
     </article>
-
     <article class="card">
       <h2>Weather App</h2>
       <p>Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.</p>
@@ -37,7 +34,6 @@
         <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/weather-app">Code</a>
       </div>
     </article>
-
     <article class="card">
       <h2>Notes App</h2>
       <p>CRUD, tags, colors, pin, search/sort, export/import, markdown, undo/redo.</p>
@@ -47,40 +43,30 @@
       </div>
     </article>
   </section>
-
   <section id="contact" class="contact reveal">
     <h2>Contact me</h2>
     <p>Feel free to reach out — I’ll reply as soon as I can.</p>
-
     <form id="contactForm" class="form" action="https://formspree.io/f/mwpaeqrj" method="POST">
       <div class="row">
         <input type="text" name="name" placeholder="Your name" required />
         <input type="email" name="email" placeholder="Your email" required />
       </div>
-
       <textarea name="message" placeholder="Your message…" rows="5" required></textarea>
-
       <!-- honeypot -->
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
       <input type="hidden" name="_subject" value="Portfolio contact" />
       <input type="hidden" name="_replyto" value="replyTo" />
-
       <div class="row end">
         <button type="submit" class="btn" id="sendBtn">Send</button>
         <a class="btn ghost" href="mailto:stekanovicdejange99@gmail.com">Open email</a>
       </div>
-
       <div id="formTip" class="tip" role="status" aria-live="polite"></div>
     </form>
   </section>
-
   <footer class="foot">
     <p class="muted">© <span id="year"></span> Dejan · Built with vanilla HTML/CSS/JS</p>
   </footer>
-
   <button id="toTop" class="btn to-top" aria-label="Back to top">↑ Top</button>
-
   <script src="./app.js?v=1762652603"></script>
 </body>
-
 </html>
