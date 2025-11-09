@@ -114,3 +114,35 @@ button:disabled{opacity:.6;cursor:not-allowed}
   .avatar{width:60px;height:60px}
   .theme-btn{top:12px;right:12px}
 }
+
+/* ---------- LIGHT THEME OVERRIDES ---------- */
+[data-theme="light"]{
+  --bg:#f8fafc;          /* slate-50 */
+  --card:#ffffff;        /* white */
+  --text:#0f172a;        /* slate-900 */
+  --muted:#475569;       /* slate-600 */
+  --accent:#2563eb;      /* blue-600 */
+  --accent-2:#1e40af;    /* blue-800 */
+  --ring:rgba(37,99,235,.25);
+}
+
+/* kartice i linije u light modu */
+[data-theme="light"] .card{ border-color:#e5e7eb; box-shadow:0 8px 16px rgba(15,23,42,.06); }
+
+/* ghost dugme da bude svijetlo u light modu */
+[data-theme="light"] .btn.ghost{
+  background:#f1f5f9;        /* slate-100 */
+  color:#0f172a;
+  border:1px solid #e2e8f0;  /* slate-200 */
+}
+
+/* inputi/textarea u light modu */
+[data-theme="light"] input,
+[data-theme="light"] textarea{
+  background:#ffffff;
+  color:#0f172a;
+  border-color:#e5e7eb;
+}
+
+/* temu dugme ostaje neutralno, ali border malo vidljiviji u light */
+[data-theme="light"] .theme-btn{ border-color:#e2e8f0; }
