@@ -344,3 +344,49 @@ document.addEventListener('click', (e) => {
   window.__toggleTheme = toggleTheme;
 })();
  // === end: Theme button auto-create ===
+
+// === FIXED THEME TOGGLE (always visible) ===
+(function () {
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  function getTheme() {
+    try {
+      return localStorage.getItem(KEY) ||
+        (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch (_) { return 'dark'; }
+  }
+
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem(KEY, t); } catch (_) {}
+    if (btn) btn.textContent = (t === 'dark' ? 'Light' : 'Dark');
+  }
+
+  function toggleTheme() {
+    const cur = root.getAttribute('data-theme') || getTheme();
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  }
+
+  // Create button if missing
+  let btn = document.getElementById('theme');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'theme';
+    btn.className = 'btn ghost small';
+    btn.style.position = 'fixed';
+    btn.style.top = '16px';
+    btn.style.right = '16px';
+    btn.style.zIndex = '9999';
+    btn.style.opacity = '.9';
+    btn.textContent = (getTheme() === 'dark' ? 'Light' : 'Dark');
+    document.body.appendChild(btn);
+  }
+
+  if (!btn.dataset.bound) {
+    btn.addEventListener('click', toggleTheme);
+    btn.dataset.bound = '1';
+  }
+
+  applyTheme(getTheme());
+})();
