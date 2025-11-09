@@ -251,3 +251,6 @@ body{background:var(--bg);color:var(--text);}
 
 /* theme toggle click safety */
 #theme { position: relative; z-index: 5; pointer-events: auto; }
+
+/* click safety for theme button */
+#theme{position:relative;z-index:9999;pointer-events:auto;}
