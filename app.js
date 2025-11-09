@@ -132,3 +132,56 @@ window.addEventListener("scroll", updateToTopBtn);
     });
   });
 })();
+/* ===== Theme toggle v2: single-button + delegation ===== */
+(() => {
+  const KEY='site.theme';
+  const root=document.documentElement;
+  const $all = (sel) => Array.from(document.querySelectorAll(sel));
+
+  const findToggles = () => {
+    const set = new Set([
+      ...$all('#theme'),
+      ...$all('.theme-toggle'),
+      ...$all('[data-theme-toggle]')
+    ]);
+    $all('button').forEach(b=>{
+      const t=(b.textContent||'').trim().toLowerCase();
+      if(t==='dark'||t==='light') set.add(b);
+    });
+    return Array.from(set);
+  };
+
+  const apply = (theme) => {
+    root.setAttribute('data-theme', theme);
+    findToggles().forEach(b => b.textContent = theme === 'dark' ? 'Light' : 'Dark');
+  };
+
+  const toggle = () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(KEY, next);
+    apply(next);
+  };
+
+  // init
+  apply(localStorage.getItem(KEY) || root.getAttribute('data-theme') || 'dark');
+
+  // zadrži samo jedno dugme
+  const all = findToggles();
+  if (all.length > 1) all.slice(1).forEach(n => n.remove());
+
+  // kreiraj ako ne postoji
+  if (findToggles().length === 0) {
+    const btn = document.createElement('button');
+    btn.id = 'theme';
+    btn.className = 'theme-toggle';
+    btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark';
+    document.body.prepend(btn);
+  }
+
+  findToggles().forEach(b => b.addEventListener('click', e => { e.preventDefault(); toggle(); }));
+  document.addEventListener('click', e => {
+    if (e.target && e.target.matches('#theme, .theme-toggle, [data-theme-toggle]')) {
+      e.preventDefault(); toggle();
+    }
+  });
+})();
