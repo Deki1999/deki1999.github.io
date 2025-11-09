@@ -455,3 +455,49 @@ window.addEventListener("scroll", updateToTopBtn);
     }
   });
 })();
+
+/* === THEME FIX v2 (robust + auto-create button) === */
+(() => {
+  const KEY = 'site.theme';
+  const getBtn = () => document.querySelector('#theme,[data-theme-toggle]');
+  const load = () => localStorage.getItem(KEY) || 'dark';
+  const save = t => localStorage.setItem(KEY, t);
+  const paint = (t) => {
+    document.documentElement.setAttribute('data-theme', t);
+    const b = getBtn();
+    if (b) b.textContent = (t === 'dark') ? 'Light' : 'Dark';
+  };
+
+  let cur = load();
+  paint(cur);
+
+  // ako nema dugmeta – napravi ga i dodaj na vrh body-ja
+  let btn = getBtn();
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'theme';
+    btn.className = 'btn ghost small theme-toggle';
+    btn.textContent = (cur === 'dark') ? 'Light' : 'Dark';
+    // stavi ga blizu headera; ako nema headera, ide na početak body-ja
+    (document.querySelector('header') || document.body).prepend(btn);
+  }
+
+  // bindaj klik samo jednom
+  if (!btn.dataset._bound) {
+    btn.dataset._bound = '1';
+    btn.addEventListener('click', () => {
+      cur = (cur === 'dark') ? 'light' : 'dark';
+      save(cur);
+      paint(cur);
+    });
+  }
+
+  // delegacija kao dodatni osigurač (ako neko kasnije zameni dugme)
+  document.addEventListener('click', (e) => {
+    if (e.target && (e.target.id === 'theme' || e.target.matches('[data-theme-toggle]'))) {
+      cur = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+      save(cur);
+      paint(cur);
+    }
+  });
+})();
