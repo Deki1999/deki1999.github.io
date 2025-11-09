@@ -195,3 +195,14 @@ input:focus, textarea:focus {
   opacity: 1;
   transform: none;
 }/* bump 1762649309 */
+
+/* --- emergency show to unblock page --- */
+.reveal,
+.card,
+.hero,
+.top,
+.contact,
+.grid {
+  opacity: 1 !important;
+  transform: none !important;
+}
