@@ -2,7 +2,6 @@
 (() => {
   'use strict';
 
-  /* ---------- helpers ---------- */
   const $  = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
 
@@ -18,7 +17,6 @@
     if (btn) btn.textContent = (t === 'dark') ? 'Light' : 'Dark';
   };
 
-  // Kreiraj dugme ako ga nema
   const ensureThemeBtn = () => {
     let btn = $('#theme');
     if (!btn) {
@@ -26,7 +24,6 @@
       btn.id = 'theme';
       btn.className = 'btn ghost small';
       btn.type = 'button';
-      // umetni na kraj prvog .intro bloka (ili fallback u header/body)
       const host = $('.intro') || $('header') || document.body;
       host.appendChild(btn);
     }
@@ -36,10 +33,8 @@
   const initTheme = () => {
     const cur = loadTheme();
     applyTheme(cur);
-
     const btn = ensureThemeBtn();
     btn.textContent = (cur === 'dark') ? 'Light' : 'Dark';
-
     if (!btn.dataset.bound) {
       btn.dataset.bound = '1';
       btn.addEventListener('click', () => {
@@ -59,23 +54,19 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (tip) tip.textContent = 'Sending…';
-
       try {
         const res = await fetch(form.action, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: new FormData(form)
         });
-
         if (res.ok) {
           if (tip) tip.textContent = 'Thanks! Your message was sent.';
           form.reset();
-          // Ako koristiš ?contact=thanks redirect u actionu,
-          // Formspree će ionako napraviti redirect server-side.
         } else {
           if (tip) tip.textContent = 'Oops, something went wrong. Try again later.';
         }
-      } catch (err) {
+      } catch {
         if (tip) tip.textContent = 'Network error. Please try again.';
       }
     });
@@ -87,7 +78,7 @@
     if (y) y.textContent = new Date().getFullYear();
   };
 
-  /* ---------- ToTop button (ako postoji) ---------- */
+  /* ---------- ToTop ---------- */
   const initToTop = () => {
     const btn = $('#toTop');
     if (!btn) return;
@@ -99,7 +90,7 @@
     onScroll();
   };
 
-  /* ---------- Reveal (ako ima .reveal) ---------- */
+  /* ---------- Reveal ---------- */
   const initReveal = () => {
     const items = $$('.reveal');
     if (!items.length) return;
@@ -116,6 +107,5 @@
     initYear();
     initToTop();
     initReveal();
-    // console.log('[boot] ok');
   });
 })();
