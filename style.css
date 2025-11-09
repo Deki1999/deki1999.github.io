@@ -224,3 +224,14 @@ html[data-theme="light"]{
 body{background:var(--bg);color:var(--text)}
 .theme-toggle{border:1px solid var(--border);background:var(--surface);color:var(--text);opacity:.9;border-radius:10px;padding:6px 10px}
 .theme-toggle:hover{opacity:1}
+
+/* Kill-switch: sakrij bilo koje staro theme dugme osim našeg #theme__single */
+#theme, .theme-toggle:not(#theme__single), [data-theme-toggle] { display: none !important; }
+
+/* Naše jedino dugme (ako nije već stilizovano) */
+#theme__single.theme-toggle{
+  position: fixed; top: 16px; right: 16px; z-index: 9999;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text); opacity: .9; border-radius: 10px; padding: 6px 10px;
+}
+#theme__single.theme-toggle:hover{ opacity: 1; }
