@@ -501,3 +501,42 @@ window.addEventListener("scroll", updateToTopBtn);
     }
   });
 })();
+
+/* === THEME TOGGLE (robust, auto-create) === */
+(() => {
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  const getBtn = () => document.querySelector('#theme,[data-theme-toggle]');
+  const load   = () => localStorage.getItem(KEY) || 'dark';
+  const paint  = (t) => {
+    root.setAttribute('data-theme', t);
+    const b = getBtn();
+    if (b) b.textContent = (t === 'dark') ? 'Light' : 'Dark';
+  };
+  const save   = (t) => localStorage.setItem(KEY, t);
+
+  // 1) Postavi početnu temu
+  let cur = load();
+  paint(cur);
+
+  // 2) Ako nema dugmeta — napravi ga
+  let btn = getBtn();
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'theme';
+    btn.className = 'btn ghost small theme-toggle';
+    btn.textContent = (cur === 'dark') ? 'Light' : 'Dark';
+    (document.querySelector('header') || document.body).prepend(btn);
+  }
+
+  // 3) Veži klik (samo jednom)
+  if (!btn.dataset._bound) {
+    btn.dataset._bound = '1';
+    btn.addEventListener('click', () => {
+      cur = (root.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+      save(cur);
+      paint(cur);
+    });
+  }
+})();
