@@ -357,3 +357,35 @@ window.addEventListener("scroll", updateToTopBtn);
     boot();
   }
 })();
+
+/* === THEME TOGGLE — failsafe === */
+(() => {
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  const get = () => localStorage.getItem(KEY) || 'dark';
+  const apply = (t) => {
+    root.setAttribute('data-theme', t);
+    const btn = document.getElementById('theme__single');
+    if (btn) btn.textContent = t === 'dark' ? 'Dark' : 'Light';
+  };
+  const set = (t) => { localStorage.setItem(KEY, t); apply(t); };
+
+  // Ensure one button exists
+  let btn = document.getElementById('theme__single');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'theme__single';
+    btn.className = 'theme-toggle';
+    btn.type = 'button';
+    document.body.appendChild(btn);
+  }
+
+  // Initial apply + label
+  apply(get());
+
+  // Toggle on click
+  btn.addEventListener('click', () => {
+    set(get() === 'dark' ? 'light' : 'dark');
+  });
+})();
