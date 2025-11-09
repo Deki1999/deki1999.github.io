@@ -209,3 +209,36 @@ document.addEventListener('click', (e) => {
     apply(nxt);
   }, { capture:true });
 })();
+
+/* THEME: ultra-safe capture bind */
+(function(){
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  function apply(t){
+    root.setAttribute('data-theme', t);
+    const b = document.getElementById('theme');
+    if (b) b.textContent = (t === 'dark') ? 'Light' : 'Dark';
+  }
+
+  // Uskladi stanje pri učitavanju (ako postoji u localStorage)
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (saved) apply(saved);
+  } catch {}
+
+  // Globalni capture handler: uhvati klik PRE svih drugih listener-a
+  document.addEventListener('click', function(ev){
+    const b = ev.target && ev.target.closest ? ev.target.closest('#theme') : null;
+    if (!b) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const cur = root.getAttribute('data-theme') || 'dark';
+    const nxt = (cur === 'dark') ? 'light' : 'dark';
+
+    try { localStorage.setItem(KEY, nxt); } catch {}
+    apply(nxt);
+    console.log('THEME =>', nxt);
+  }, true);
+})();
