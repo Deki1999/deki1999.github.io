@@ -185,3 +185,95 @@ window.addEventListener("scroll", updateToTopBtn);
     }
   });
 })();
+/* ===== Theme toggle v3 (robust): single-button, cleanup + observer ===== */
+(() => {
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  const qAll = (sel) => Array.from(document.querySelectorAll(sel));
+
+  // Vrati SVA potencijalna theme dugmad (razni selektori + dugmad sa tekstom "Dark/Light")
+  const findToggles = () => {
+    const set = new Set([
+      ...qAll('#theme'),
+      ...qAll('.theme-toggle'),
+      ...qAll('[data-theme-toggle]')
+    ]);
+    qAll('button').forEach(b => {
+      const t = (b.textContent || '').trim().toLowerCase();
+      if (t === 'dark' || t === 'light') set.add(b);
+    });
+    return Array.from(set);
+  };
+
+  const apply = (theme) => {
+    root.setAttribute('data-theme', theme);
+    // Ažuriraj tekst na SVIH (preostalih) toggle dugmadi
+    findToggles().forEach(b => b.textContent = theme === 'dark' ? 'Light' : 'Dark');
+  };
+
+  const toggle = () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(KEY, next);
+    apply(next);
+  };
+
+  const ensureOneButton = () => {
+    let btns = findToggles();
+
+    // Ako nema nijednog — napravi jedan u body
+    if (btns.length === 0) {
+      const b = document.createElement('button');
+      b.id = 'theme';
+      b.className = 'theme-toggle';
+      b.type = 'button';
+      document.body.prepend(b);
+      btns = [b];
+    }
+
+    // Ostavi samo PRVO, ostala ukloni
+    if (btns.length > 1) {
+      btns.slice(1).forEach(n => n.remove());
+      btns = [btns[0]];
+    }
+
+    // Osiguraj listener na tom jednom
+    const btn = btns[0];
+    if (!btn._boundTheme) {
+      btn.addEventListener('click', (e) => { e.preventDefault(); toggle(); });
+      btn._boundTheme = true;
+    }
+
+    // Postavi labelu u skladu sa trenutno aktivnom temom
+    const cur = root.getAttribute('data-theme') || 'dark';
+    btn.textContent = (cur === 'dark') ? 'Light' : 'Dark';
+  };
+
+  // Inicijalizacija čim DOM bude spreman
+  const init = () => {
+    const stored = localStorage.getItem(KEY);
+    const initial = stored || root.getAttribute('data-theme') || 'dark';
+    apply(initial);
+    ensureOneButton();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+
+  // Delegacija (za slučaj da se kasnije doda dugme)
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    if (!t) return;
+    if (t.matches('#theme, .theme-toggle, [data-theme-toggle]')) {
+      e.preventDefault();
+      toggle();
+    }
+  });
+
+  // MutationObserver: ako se DOM promjeni i pojavi se još jedno dugme — očisti
+  const mo = new MutationObserver(() => ensureOneButton());
+  mo.observe(document.documentElement, { childList: true, subtree: true });
+})();
