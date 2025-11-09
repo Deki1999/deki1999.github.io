@@ -502,7 +502,6 @@ window.addEventListener("scroll", updateToTopBtn);
   });
 })();
 
-/* === THEME TOGGLE (robust, auto-create) === */
 (() => {
   const KEY = 'site.theme';
   const root = document.documentElement;
@@ -540,3 +539,47 @@ window.addEventListener("scroll", updateToTopBtn);
     });
   }
 })();
+
+/* === THEME TOGGLE (DOMContentLoaded, auto-create) === */
+window.addEventListener('DOMContentLoaded', () => {
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  const btnSel = '#theme,[data-theme-toggle]';
+  const getBtn = () => document.querySelector(btnSel);
+
+  const load  = () => localStorage.getItem(KEY) || 'dark';
+  const save  = (t) => localStorage.setItem(KEY, t);
+  const paint = (t) => {
+    root.setAttribute('data-theme', t);
+    const b = getBtn();
+    if (b) b.textContent = (t === 'dark') ? 'Light' : 'Dark';
+  };
+
+  // 1) init
+  let cur = load();
+  paint(cur);
+
+  // 2) ensure button exists
+  let btn = getBtn();
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'theme';
+    btn.className = 'btn ghost small theme-toggle';
+    btn.textContent = (cur === 'dark') ? 'Light' : 'Dark';
+    (document.querySelector('header') || document.body).prepend(btn);
+    console.log('[theme] created toggle button');
+  }
+
+  // 3) click binding
+  if (!btn.dataset._bound) {
+    btn.dataset._bound = '1';
+    btn.addEventListener('click', () => {
+      cur = (root.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+      save(cur);
+      paint(cur);
+    });
+  }
+
+  console.log('[theme] init ok; current:', root.getAttribute('data-theme'));
+});
