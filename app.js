@@ -70,3 +70,25 @@ function updateToTopBtn() {
   else toTop.classList.remove("show");
 }
 window.addEventListener("scroll", updateToTopBtn);
+
+/* ===== Theme toggle failsafe (auto-attach) ===== */
+(() => {
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+  const btn  = document.querySelector('#theme');
+  if (!btn) return; // nema dugmeta, ništa
+
+  const apply = (t) => {
+    root.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? 'Light' : 'Dark';
+  };
+
+  let theme = localStorage.getItem(KEY) || (root.getAttribute('data-theme') || 'dark');
+  apply(theme);
+
+  btn.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(KEY, theme);
+    apply(theme);
+  });
+})();
