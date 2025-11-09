@@ -166,3 +166,46 @@ document.addEventListener('click', (e) => {
     }
   }, { capture: true });
 })();
+
+/* Theme: emergency fallback bind */
+(function () {
+  const KEY = 'site.theme';
+
+  function apply(t){
+    document.documentElement.setAttribute('data-theme', t);
+    const b = document.getElementById('theme');
+    if (b) b.textContent = (t === 'dark') ? 'Light' : 'Dark';
+  }
+  function cur(){
+    return document.documentElement.getAttribute('data-theme') || 'dark';
+  }
+
+  // Primarni bind (ako naš raniji kod iz nekog razloga ne okine)
+  document.addEventListener('DOMContentLoaded', () => {
+    const b = document.getElementById('theme');
+    if (b && !b.dataset.emergencyBound) {
+      b.addEventListener('click', () => {
+        const nxt = (cur()==='dark') ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, nxt); } catch {}
+        apply(nxt);
+      });
+      b.dataset.emergencyBound = '1';
+    }
+
+    // Uskladi labelu sa postojećim stanjem
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) apply(saved); else apply(cur());
+    } catch { apply(cur()); }
+  });
+
+  // Dodatna delegacija kao osiguranje
+  document.addEventListener('click', (e) => {
+    const t = e.target && e.target.closest ? e.target.closest('#theme,[data-theme-toggle]') : null;
+    if (!t) return;
+    e.preventDefault();
+    const nxt = (cur()==='dark') ? 'light' : 'dark';
+    try { localStorage.setItem(KEY, nxt); } catch {}
+    apply(nxt);
+  }, { capture:true });
+})();

@@ -248,3 +248,6 @@ body{background:var(--bg);color:var(--text)}
 body{background:var(--bg);color:var(--text);}
 .card{background:var(--card);border:1px solid var(--border);}
 .btn{border:1px solid var(--border);}
+
+/* theme toggle click safety */
+#theme { position: relative; z-index: 5; pointer-events: auto; }
