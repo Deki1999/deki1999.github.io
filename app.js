@@ -124,3 +124,45 @@ document.addEventListener('click', (e) => {
     if (btn) btn.textContent = (next === 'dark') ? 'Light' : 'Dark';
   } catch {}
 }, { capture: true });
+
+/* Theme: robust bind */
+(function () {
+  const KEY = 'site.theme';
+
+  function apply(t){
+    document.documentElement.setAttribute('data-theme', t);
+    const b = document.getElementById('theme');
+    if (b) b.textContent = (t === 'dark') ? 'Light' : 'Dark';
+  }
+  function cur(){
+    return document.documentElement.getAttribute('data-theme') || 'dark';
+  }
+  function toggle(){
+    const nxt = (cur()==='dark') ? 'light' : 'dark';
+    try { localStorage.setItem(KEY, nxt); } catch {}
+    apply(nxt);
+  }
+
+  // Primarni bind nakon što DOM postoji
+  document.addEventListener('DOMContentLoaded', () => {
+    const b = document.getElementById('theme');
+    if (b && !b.dataset.bound) {
+      b.addEventListener('click', toggle);
+      b.dataset.bound = '1';
+    }
+    // Primijeni prethodno sačuvanu ili trenutnu temu i uskladi labelu
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) apply(saved);
+      else apply(cur());
+    } catch { apply(cur()); }
+  });
+
+  // Globalni fallback (ako nešto spriječi gore navedeno)
+  document.addEventListener('click', (e) => {
+    if (e.target.closest && e.target.closest('#theme,[data-theme-toggle]')) {
+      e.preventDefault();
+      toggle();
+    }
+  }, { capture: true });
+})();
