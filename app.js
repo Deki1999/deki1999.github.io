@@ -292,17 +292,14 @@ window.addEventListener("scroll", updateToTopBtn);
       const looksLike = el.matches('#theme, .theme-toggle, [data-theme-toggle]')
         || /^(dark|light)$/.test(txt)
         || txt === 'tema' || txt === 'theme';
-      if (looksLike && el.id !== 'theme__single') {
         try { el.remove(); } catch {}
       }
     });
   };
 
   const ensureSingleButton = () => {
-    let btn = document.querySelector('#theme__single');
     if (!btn) {
       btn = document.createElement('button');
-      btn.id = 'theme__single';
       btn.type = 'button';
       btn.className = 'theme-toggle';
       // fiksno gore desno
@@ -342,7 +339,6 @@ window.addEventListener("scroll", updateToTopBtn);
     document.addEventListener('click', (e) => {
       const t = e.target;
       if (!t) return;
-      if (t.matches('#theme, .theme-toggle, [data-theme-toggle]') && t.id !== 'theme__single') {
         e.preventDefault();
         const next = getTheme() === 'dark' ? 'light' : 'dark';
         setTheme(next);
@@ -366,16 +362,13 @@ window.addEventListener("scroll", updateToTopBtn);
   const get = () => localStorage.getItem(KEY) || 'dark';
   const apply = (t) => {
     root.setAttribute('data-theme', t);
-    const btn = document.querySelector('#theme, #theme__single, [data-theme-toggle]');
     if (btn) btn.textContent = t === 'dark' ? 'Dark' : 'Light';
   };
   const set = (t) => { localStorage.setItem(KEY, t); apply(t); };
 
   // Ensure one button exists
-  let btn = document.querySelector('#theme, #theme__single, [data-theme-toggle]');
   if (!btn) {
     btn = document.createElement('button');
-    btn.id = 'theme__single';
     btn.className = 'theme-toggle';
     btn.type = 'button';
     document.body.appendChild(btn);
@@ -423,6 +416,42 @@ window.addEventListener("scroll", updateToTopBtn);
       theme = (getTheme() === 'dark') ? 'light' : 'dark';
       localStorage.setItem(THEME_KEY, theme);
       setTheme(theme);
+    }
+  });
+})();
+
+/* === THEME FIX (final harden) === */
+(() => {
+  const KEY = 'site.theme';
+  const btn = () => document.querySelector('#theme');
+  const load = () => localStorage.getItem(KEY) || 'dark';
+  const save = t => localStorage.setItem(KEY, t);
+  const paint = t => {
+    document.documentElement.setAttribute('data-theme', t);
+    const b = btn();
+    if (b) b.textContent = (t === 'dark') ? 'Light' : 'Dark';
+  };
+
+  let cur = load();
+  paint(cur);
+
+  // direktno ako je dugme tu
+  const bNow = btn();
+  if (bNow && !bNow.dataset._bound) {
+    bNow.dataset._bound = '1';
+    bNow.addEventListener('click', () => {
+      cur = (cur === 'dark') ? 'light' : 'dark';
+      save(cur);
+      paint(cur);
+    });
+  }
+
+  // delegacija (ako se dugme ubaci kasnije)
+  document.addEventListener('click', (e) => {
+    if (e.target?.id === 'theme') {
+      cur = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+      save(cur);
+      paint(cur);
     }
   });
 })();
