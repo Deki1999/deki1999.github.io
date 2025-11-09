@@ -277,3 +277,83 @@ window.addEventListener("scroll", updateToTopBtn);
   const mo = new MutationObserver(() => ensureOneButton());
   mo.observe(document.documentElement, { childList: true, subtree: true });
 })();
+/* ===== Theme toggle v4: hard reset → single button ===== */
+(() => {
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  const getTheme = () => localStorage.getItem(KEY) || root.getAttribute('data-theme') || 'dark';
+  const setTheme = (t) => { root.setAttribute('data-theme', t); localStorage.setItem(KEY, t); };
+
+  const nukeAllThemeButtons = () => {
+    const candidates = Array.from(document.querySelectorAll('button, a, [role="button"]'));
+    candidates.forEach(el => {
+      const txt = (el.textContent || '').trim().toLowerCase();
+      const looksLike = el.matches('#theme, .theme-toggle, [data-theme-toggle]')
+        || /^(dark|light)$/.test(txt)
+        || txt === 'tema' || txt === 'theme';
+      if (looksLike && el.id !== 'theme__single') {
+        try { el.remove(); } catch {}
+      }
+    });
+  };
+
+  const ensureSingleButton = () => {
+    let btn = document.querySelector('#theme__single');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'theme__single';
+      btn.type = 'button';
+      btn.className = 'theme-toggle';
+      // fiksno gore desno
+      btn.style.position = 'fixed';
+      btn.style.top = '16px';
+      btn.style.right = '16px';
+      btn.style.zIndex = '9999';
+      document.body.appendChild(btn);
+    }
+    // labela
+    const now = getTheme();
+    btn.textContent = now === 'dark' ? 'Light' : 'Dark';
+
+    if (!btn._bound) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const next = getTheme() === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+        btn.textContent = next === 'dark' ? 'Light' : 'Dark';
+      });
+      btn._bound = true;
+    }
+  };
+
+  const boot = () => {
+    // primijeni temu
+    setTheme(getTheme());
+    // očisti sve moguće stare/dvostruke togglere i ostavi 1
+    nukeAllThemeButtons();
+    ensureSingleButton();
+
+    // Ako se DOM kasnije promijeni i pojavi se novo “Dark/Light” dugme — odmah ga ukloni
+    const mo = new MutationObserver(() => { nukeAllThemeButtons(); ensureSingleButton(); });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Sigurnosna delegacija (ako neko ručno ubaci #theme itd.)
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      if (!t) return;
+      if (t.matches('#theme, .theme-toggle, [data-theme-toggle]') && t.id !== 'theme__single') {
+        e.preventDefault();
+        const next = getTheme() === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+        ensureSingleButton();
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+})();
