@@ -1,61 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dejan • Projects</title>
-  <meta name="description" content="Beginner Web Developer — HTML/CSS/JavaScript. Small, polished projects deployed on GitHub Pages." />
-  <meta name="theme-color" content="#0f172a" />
-  <meta property="og:title" content="Dejan • Projects" />
-  <meta property="og:description" content="Beginner Web Developer — HTML/CSS/JavaScript. Small, polished projects deployed on GitHub Pages." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://deki1999.github.io/" />
-  <meta property="og:image" content="https://github.com/Deki1999.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Dejan • Projects" />
-  <meta name="twitter:description" content="Beginner Web Developer — HTML/CSS/JavaScript." />
-  <meta name="twitter:image" content="https://github.com/Deki1999.png" />
   <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="data:,">
 </head>
 <body>
-  <header class="top reveal">
+  <header class="hero">
+    <img class="avatar" src="https://github.com/Deki1999.png" alt="Dejan avatar" />
     <h1>Dejan Stevanović</h1>
-    <button id="theme" class="btn">Dark</button>
+    <p class="tagline">Beginner Web Developer focused on <b>HTML/CSS/JavaScript</b>. Building small, polished projects and shipping them on GitHub Pages.</p>
+    <div class="actions">
+      <a class="btn" href="#projects">View projects</a>
+      <a class="btn ghost" href="https://github.com/Deki1999" target="_blank">GitHub</a>
+    </div>
+    <button id="themeBtn" class="theme-btn">Dark</button>
   </header>
 
-  <section class="hero reveal">
-    <img class="avatar" src="https://github.com/Deki1999.png" alt="Dejan’s avatar" />
-    <div>
-      <p class="muted">
-        Beginner Web Developer focused on <strong>HTML/CSS/JavaScript</strong>. Building small, polished projects and shipping them on GitHub Pages.
-      </p>
-      <div class="links">
-        <a class="btn" href="#projects">View projects</a>
-        <a class="btn ghost" href="https://github.com/Deki1999" target="_blank">GitHub</a>
+  <section id="projects" class="grid reveal">
+    <article class="card">
+      <h2>Typing Test</h2>
+      <p>Live WPM & Accuracy, duration 10/30/60s, pause/resume, progress bar, sound toggle.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/typing-test/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/typing-test">Code</a>
       </div>
-    </div>
-  </section>
+    </article>
 
-  <main id="projects" class="grid">
-    <!-- tvoje project kartice ovde (ostaju kako jesu) -->
-  </main>
+    <article class="card">
+      <h2>Weather App</h2>
+      <p>Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/weather-app/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/weather-app">Code</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>Notes App</h2>
+      <p>CRUD, tags, colors, pin, search/sort, export/import, markdown, undo/redo.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/notes-app/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/notes-app">Code</a>
+      </div>
+    </article>
+  </section>
 
   <section id="contact" class="contact reveal">
     <h2>Contact me</h2>
-    <p class="muted">Feel free to reach out — I’ll reply as soon as I can.</p>
+    <p>Feel free to reach out — I’ll reply as soon as I can.</p>
 
-    <form id="contactForm" class="form" action="https://formspree.io/f/mwpaeqrj" method="POST" novalidate>
+    <form id="contactForm" class="form" action="https://formspree.io/f/mwpaeqrj" method="POST">
       <div class="row">
-        <input id="name"    name="name"    placeholder="Your name" required />
-        <input id="email"   name="email"   type="email" placeholder="Your email" required />
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
       </div>
-      <textarea id="message" name="message" placeholder="Your message…" rows="5" required></textarea>
-      <input type="hidden" name="_replyto" id="replyTo" />
+
+      <textarea name="message" placeholder="Your message…" rows="5" required></textarea>
+
+      <!-- honeypot -->
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+      <input type="hidden" name="_subject" value="Portfolio contact" />
+      <input type="hidden" name="_replyto" value="replyTo" />
+      <input type="hidden" name="_next" value="https://deki1999.github.io/?contact=thanks" />
+
       <div class="row end">
         <button type="submit" class="btn" id="sendBtn">Send</button>
-        <a class="btn ghost" href="mailto:stevanovicdejange999@gmail.com">Open email</a>
+        <a class="btn ghost" href="mailto:stekanovicdejange99@gmail.com">Open email</a>
       </div>
+
       <div id="formTip" class="tip" role="status" aria-live="polite"></div>
     </form>
   </section>
@@ -66,7 +81,6 @@
 
   <button id="toTop" class="btn to-top" aria-label="Back to top">↑ Top</button>
 
-  <!-- cache-bust param da povuče novi JS -->
-  <script src="./app.js?v=pushFix"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
