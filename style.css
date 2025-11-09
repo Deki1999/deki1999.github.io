@@ -150,3 +150,7 @@ button:disabled{opacity:.6;cursor:not-allowed}
 /* === JS failsafe: prikaži reveal i bez .show === */
 .reveal{opacity:1;transform:none}
 .reveal.show{opacity:1;transform:none}
+
+/* theme toggle */
+.theme-toggle{position:fixed;top:16px;right:16px;padding:6px 10px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);opacity:.9;transition:opacity .15s}
+.theme-toggle:hover{opacity:1}
