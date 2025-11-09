@@ -110,3 +110,17 @@
   });
 })();
 // bump Sun Nov  9 03:10:26 CET 2025
+
+/* --- Fallback: global click delegacija za theme toggle --- */
+document.addEventListener('click', (e) => {
+  const trg = e.target.closest('#theme, [data-theme-toggle]');
+  if (!trg) return;
+  try {
+    const root = document.documentElement;
+    const next = (root.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+    localStorage.setItem('site.theme', next);
+    root.setAttribute('data-theme', next);
+    const btn = document.getElementById('theme');
+    if (btn) btn.textContent = (next === 'dark') ? 'Light' : 'Dark';
+  } catch {}
+}, { capture: true });
