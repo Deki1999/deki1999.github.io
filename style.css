@@ -1,53 +1,197 @@
-:root{
-  --bg:#0f172a; --panel:#0b1220; --ink:#e2e8f0; --muted:#94a3b8; --border:#334155;
-  --btn:#38bdf8; --btn-ink:#001018; --glow:rgba(56,189,248,.25);
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-:root[data-theme="light"]{
-  --bg:#f6f8ff; --panel:#ffffff; --ink:#0b1220; --muted:#516079; --border:#d6def0;
-  --btn:#0ea5e9; --btn-ink:#001018; --glow:rgba(14,165,233,.25);
+
+html {
+  scroll-behavior: smooth;
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:grid;place-items:center;min-height:100vh;scroll-behavior:smooth}
-.top{width:min(980px,92vw);display:flex;align-items:center;justify-content:space-between;margin-top:22px}
-.top h1{margin:0;font-size:28px}
-.top button{padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:var(--ink);cursor:pointer}
-.tagline{width:min(980px,92vw);color:var(--muted);margin:8px 0 20px}
-/* HERO */
-.hero{width:min(980px,92vw);display:flex;gap:18px;align-items:center;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 20px 40px rgba(0,0,0,.18)}
-.avatar{width:96px;height:96px;border-radius:50%;border:2px solid var(--border);box-shadow:0 0 0 6px var(--glow);object-fit:cover;background:#111;animation:float 6s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.hero-text h2{margin:0 0 6px}
-.hero-text p{margin:0 0 10px;color:var(--muted)}
-.hero-actions{display:flex;gap:8px}
-/* CARDS */
-.grid{width:min(980px,92vw);display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 10px 25px rgba(0,0,0,.18);transform:translateY(0);transition:transform .2s ease, box-shadow .2s ease}
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.25)}
-.card h2{margin:0 0 6px;font-size:20px}
-.card p{margin:0 0 12px;color:var(--muted)}
-.actions{display:flex;gap:8px}
-.btn{background:var(--btn);color:var(--btn-ink);padding:10px 14px;border-radius:10px;text-decoration:none;border:0;display:inline-block}
-.btn:hover{filter:brightness(1.05)}
-.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--ink)}
-/* CONTACT */
-.contact{width:min(980px,92vw);background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px;margin-top:22px;box-shadow:0 12px 26px rgba(0,0,0,.18)}
-.contact h2{margin:0 0 8px}
-.contact .muted{color:var(--muted);margin:0 0 12px}
-.form{display:flex;flex-direction:column;gap:10px}
-.form .row{display:flex;gap:10px}
-.form .row.end{justify-content:flex-end}
-input,textarea{flex:1;padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:var(--ink)}
-textarea{resize:vertical}
-.tip{min-height:18px;color:var(--muted)}
-/* FOOTER */
-.foot{width:min(980px,92vw);display:flex;align-items:center;justify-content:space-between;margin:18px 0 28px;color:var(--muted);gap:8px;flex-wrap:wrap}
-.links{display:flex;gap:12px}
-.links a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--border)}
-/* REVEAL */
-.fade-in{opacity:0;transform:translateY(8px);animation:fade .5s ease forwards}
-.fade-in.d1{animation-delay:.1s}.fade-in.d2{animation-delay:.2s}
-@keyframes fade{to{opacity:1;transform:none}}
-.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease, transform .5s ease}
-.reveal.show{opacity:1;transform:none}
-.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}
-@media (max-width:620px){.hero{flex-direction:column;align-items:flex-start}.avatar{width:80px;height:80px}.top h1{font-size:22px}}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  line-height: 1.55;
+  background: var(--bg);
+  color: var(--text);
+  padding: 0 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ===== Theme ===== */
+:root {
+  --bg: #0f172a;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --card: #1e293b;
+  --border: #334155;
+  --btn: #38bdf8;
+  --btn-text: #001018;
+}
+
+[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --card: #f1f5f9;
+  --border: #cbd5e1;
+  --btn: #0ea5e9;
+  --btn-text: #ffffff;
+}
+
+/* ===== Typography ===== */
+h1, h2 {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+p {
+  margin-bottom: 10px;
+}
+.muted { color: var(--muted); }
+
+/* ===== Layout ===== */
+header.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 0 12px;
+}
+
+.hero {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  margin: 20px 0 40px;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  box-shadow: 0 6px 30px rgba(0,0,0,.25);
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  background: var(--btn);
+  color: var(--btn-text);
+  transition: opacity .2s ease, transform .2s ease;
+  text-decoration: none;
+  display: inline-block;
+  button:disabled { opacity: .6; cursor: not-allowed; }
+}
+.btn:hover { opacity: .85; transform: translateY(-1px); }
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn.ghost:hover { background: var(--border); }
+
+/* ===== Projects grid ===== */
+.grid {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 60px;
+}
+@media (min-width: 700px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card h2 { font-size: 18px; }
+
+/* ===== Contact form ===== */
+.contact { margin: 80px 0; }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.row {
+  display: flex;
+  gap: 12px;
+}
+.row.end {
+  justify-content: flex-end;
+}
+input, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 15px;
+}
+input:focus, textarea:focus {
+  outline: 2px solid var(--btn);
+}
+
+/* Status message below form */
+.tip {
+  font-size: 14px;
+  color: var(--muted);
+  min-height: 22px;
+  margin-top: 4px;
+}
+
+/* ===== Footer ===== */
+.foot {
+  text-align: center;
+  padding: 50px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ===== Back to top ===== */
+.to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 30;
+}
+.to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+/* ===== Reveal animation ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: none;
+}
