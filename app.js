@@ -290,3 +290,57 @@ document.addEventListener('click', (e) => {
   });
 })();
  // --- end theme toggle ---
+// === Theme button auto-create (no-HTML edit) ===
+(function(){
+  const KEY = 'site.theme';
+  const root = document.documentElement;
+
+  function currentTheme(){
+    try {
+      return localStorage.getItem(KEY) ||
+        (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch(_) { return 'dark'; }
+  }
+  function applyTheme(t){
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem(KEY, t); } catch(_) {}
+    const b = document.getElementById('theme');
+    if (b) b.textContent = (t === 'dark' ? 'Light' : 'Dark');
+  }
+  function toggleTheme(){
+    const cur = root.getAttribute('data-theme') || currentTheme();
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  }
+
+  // 1) Osiguraj da je postavljen početni theme
+  if (!root.getAttribute('data-theme')) applyTheme(currentTheme());
+
+  // 2) Ako dugme ne postoji – napravi ga i ubaci u <header> ili u body
+  function ensureBtn(){
+    let btn = document.getElementById('theme');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'theme';
+      btn.type = 'button';
+      btn.className = 'btn ghost small';
+      btn.textContent = (root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark');
+
+      // Probaj u header; ako ga nema, stavi na kraj body-ja
+      const hdr = document.querySelector('header') || document.body;
+      hdr.appendChild(btn);
+    }
+    if (!btn.dataset.bound) {
+      btn.addEventListener('click', toggleTheme);
+      btn.dataset.bound = '1';
+    }
+  }
+  ensureBtn();
+
+  // 3) Ako neko dinamički promijeni header, re-ensure
+  const obs = new MutationObserver(() => ensureBtn());
+  obs.observe(document.body, { childList:true, subtree:true });
+
+  // Izvezi globalno (nije obavezno, ali pomaže debug)
+  window.__toggleTheme = toggleTheme;
+})();
+ // === end: Theme button auto-create ===
