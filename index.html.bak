@@ -59,12 +59,12 @@
   <section id="contact" class="contact reveal">
     <h2>Contact me</h2>
     <p class="muted">Feel free to reach out — I’ll reply as soon as I can.</p>
-    <form id="contactForm" action="https://formspree.io/f/mwpaeqrj" method="POST" action="https://formspree.io/f/mwpaeqrj" method="POST" class="form">
+    <form id="contactForm" class="form">
       <div class="row">
-        <input id="name" name="name"   placeholder="Your name" required />
-        <input id="email" name="email"  type="email" placeholder="Your email" required />
+        <input id="name"   placeholder="Your name" required />
+        <input id="email"  type="email" placeholder="Your email" required />
       </div>
-      <textarea id="message" name="message" placeholder="Your message…" rows="5" required></textarea>
+      <textarea id="message" placeholder="Your message…" rows="5" required></textarea>
       <div class="row end">
         <button type="submit" class="btn">Send</button>
         <a class="btn ghost" href="mailto:stevanovicdejange999@gmail.com">Open email</a>
