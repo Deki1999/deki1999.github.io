@@ -254,3 +254,42 @@ body{background:var(--bg);color:var(--text);}
 
 /* click safety for theme button */
 #theme{position:relative;z-index:9999;pointer-events:auto;}
+/* === ABOUT SECTION === */
+.about {
+  margin: 60px auto;
+  max-width: 900px;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.about p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tag {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--card) 85%, var(--accent));
+  border: 1px solid var(--border);
+  transition: 0.2s ease;
+}
+
+.tag:hover {
+  transform: scale(1.05);
+}
