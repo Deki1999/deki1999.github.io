@@ -293,3 +293,21 @@ body{background:var(--bg);color:var(--text);}
 .tag:hover {
   transform: scale(1.05);
 }
+/* === SCROLL FADE-IN ANIMATION === */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === SKILL TAG ICONS === */
+.tag::before {
+  content: attr(data-icon);
+  margin-right: 6px;
+  opacity: 0.9;
+}
