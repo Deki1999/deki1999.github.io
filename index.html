@@ -1,90 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dejan • Projects</title>
+  <meta name="description" content="Beginner Web Developer — HTML/CSS/JS projects" />
+  <meta property="og:title" content="Dejan • Projects" />
+  <meta property="og:description" content="Beginner Web Developer — HTML/CSS/JS projects" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E💻%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" href="data:,">
 </head>
 <body>
-  <header class="hero">
-    <img class="avatar" src="https://github.com/Deki1999.png" alt="Dejan avatar" />
-    <h1>Dejan Stevanović</h1>
-    <p class="tagline">Beginner Web Developer focused on <b>HTML/CSS/JavaScript</b>. Building small, polished projects and shipping them on GitHub Pages.</p>
-    <div class="actions">
-      <a class="btn" href="#projects">View projects</a>
-      <a class="btn ghost" href="https://github.com/Deki1999" target="_blank">GitHub</a>
+  <header class="container">
+    <div class="intro">
+      <h1>Hi, I’m Dejan 👋</h1>
+      <p class="muted">Beginner web developer learning <strong>HTML</strong>, <strong>CSS</strong> and <strong>JavaScript</strong>.</p>
+      <div class="actions">
+        <a class="btn" href="#projects">View Projects</a>
+        <a class="btn ghost" href="https://github.com/Deki1999" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
-    <button id="theme" class="btn ghost small" type="button">Dark</button>
-</header>
-<!-- ===== ABOUT SECTION ===== -->
-<section class="about reveal" id="about">
-  <h2>About Me</h2>
-  <p>
-    I’m Dejan — a beginner web developer learning <strong>HTML</strong>, <strong>CSS</strong>,
-    and <strong>JavaScript</strong>. I enjoy building small interactive projects and improving every day.
-  </p>
+  </header>
 
-  <div class="skills">
-  <span class="tag" data-icon="🔶">HTML</span>
-  <span class="tag" data-icon="🔷">CSS</span>
-  <span class="tag" data-icon="🟡">JavaScript</span>
-  <span class="tag" data-icon="🔧">Git</span>
-  <span class="tag" data-icon="🌐">GitHub Pages</span>
-</div>
-</section>
-<!-- ===== END ABOUT SECTION ===== -->
-  <section id="projects" class="grid reveal">
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="about reveal">
+    <h2>About Me</h2>
+    <p>
+      I’m Dejan — a beginner web developer. I enjoy building small interactive apps and deploying them on GitHub Pages.
+      Learning every day and focusing on clean UI and simple code.
+    </p>
+    <div class="skills">
+      <span class="tag" data-icon="🔶">HTML</span>
+      <span class="tag" data-icon="🔷">CSS</span>
+      <span class="tag" data-icon="🟡">JavaScript</span>
+      <span class="tag" data-icon="🔧">Git</span>
+      <span class="tag" data-icon="🌐">GitHub Pages</span>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <main id="projects" class="container grid">
     <article class="card reveal">
       <h2>Typing Test</h2>
-      <p>Live WPM & Accuracy, duration 10/30/60s, pause/resume, progress bar, sound toggle.</p>
+      <p>Live WPM & accuracy, 10/30/60s, progress bar, sound toggle.</p>
       <div class="actions">
         <a class="btn" target="_blank" href="https://deki1999.github.io/typing-test/">Live</a>
         <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/typing-test">Code</a>
       </div>
     </article>
+
     <article class="card reveal">
       <h2>Weather App</h2>
-      <p>Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.</p>
+      <p>Open-Meteo API, geolocation & search, daily/24h, °C/°F toggle.</p>
       <div class="actions">
         <a class="btn" target="_blank" href="https://deki1999.github.io/weather-app/">Live</a>
         <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/weather-app">Code</a>
       </div>
     </article>
+
     <article class="card reveal">
       <h2>Notes App</h2>
-      <p>CRUD, tags, colors, pin, search/sort, export/import, markdown, undo/redo.</p>
+      <p>LocalStorage persistence, search, pin, delete, responsive layout.</p>
       <div class="actions">
         <a class="btn" target="_blank" href="https://deki1999.github.io/notes-app/">Live</a>
         <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/notes-app">Code</a>
       </div>
     </article>
-  </section>
-  <section id="contact" class="contact reveal">
-    <h2>Contact me</h2>
-    <p>Feel free to reach out — I’ll reply as soon as I can.</p>
-    <form id="contactForm" class="form" action="https://formspree.io/f/mwpaeqrj" method="POST">
-      <div class="row">
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="email" name="email" placeholder="Your email" required />
+  </main>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="contact container reveal">
+    <h2>Contact Me</h2>
+    <form id="contactForm" action="https://formspree.io/f/mwpaeqrj" method="POST" novalidate>
+      <div class="grid two">
+        <label>
+          <span>Name</span>
+          <input id="name" name="name" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input id="email" type="email" name="email" required />
+        </label>
       </div>
-      <textarea name="message" placeholder="Your message…" rows="5" required></textarea>
-      <!-- honeypot -->
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-      <input type="hidden" name="_subject" value="Portfolio contact" />
-      <input type="hidden" name="_replyto" value="replyTo" />
-      <div class="row end">
-        <button type="submit" class="btn" id="sendBtn">Send</button>
-        <a class="btn ghost" href="mailto:stekanovicdejange99@gmail.com">Open email</a>
+      <label>
+        <span>Message</span>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </label>
+
+      <div class="actions">
+        <button id="sendBtn" class="btn" type="submit">Send</button>
+        <span id="formTip" class="tip" role="status" aria-live="polite"></span>
       </div>
-      <div id="formTip" class="tip" role="status" aria-live="polite"></div>
     </form>
   </section>
-  <footer class="foot">
-    <p class="muted">© <span id="year"></span> Dejan · Built with vanilla HTML/CSS/JS</p>
+
+  <footer class="container muted">
+    <p>© <span id="year"></span> Dejan • Built with HTML/CSS/JS</p>
   </footer>
-  <button id="toTop" class="btn to-top" aria-label="Back to top">↑ Top</button>
+
+  <button id="toTop" class="btn to-top" aria-label="Back to top">Top</button>
+
+  <!-- tvoj JS (verzija sa cache-busterom) -->
   <script src="./app.js?v=reveal2"></script>
 </body>
 </html>
