@@ -11,7 +11,7 @@
 html[data-theme='light']{
   --bg:#f5f7fb; --card:#fff; --text:#0f1623; --muted:#5c6b80; --border:#e6ecf5; --accent:#0b84ff; --shadow:0 8px 30px rgba(0,0,0,.08);
 }
-
+html { scroll-behavior: smooth; }
 /* ==== Base ==== */
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -95,3 +95,23 @@ a{color:inherit; text-decoration:none}
 /* ==== Reveal (fade-in) ==== */
 .reveal{opacity:0; transform:translateY(20px); transition: all .7s ease-out}
 .reveal.visible{opacity:1; transform:translateY(0)}
+.topnav{
+  position: sticky; top: 0; z-index: 1000;
+  backdrop-filter: blur(6px);
+  background: color-mix(in oklab, var(--bg) 85%, transparent);
+  border-bottom: 1px solid var(--card);
+  display: flex; gap: 16px; padding: 10px 16px; margin-bottom: 12px;
+}
+.topnav a{
+  padding: 6px 10px; border-radius: 10px; text-decoration: none;
+  color: var(--text-muted);
+}
+.topnav a.active{ background: var(--card); color: var(--text); }
+.topnav a:hover{ color: var(--text); }
+.to-top{
+  position: fixed; right: 16px; bottom: 16px; z-index: 999;
+  padding: 10px 12px; border-radius: 12px; border: 1px solid var(--card);
+  background: var(--card); color: var(--text); opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+.to-top.show{ opacity: 1; pointer-events: auto; }
