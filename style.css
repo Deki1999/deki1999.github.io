@@ -108,19 +108,26 @@ a{color:inherit; text-decoration:none}
   border-bottom: 1px solid var(--card);
 }
 
-.topnav a{
+.topnav a {
   display: inline-block;
   padding: 6px 12px;
   border-radius: 999px;
   text-decoration: none;
   color: var(--text-muted);
-  transition: .2s ease;
+  transition: all 0.25s ease;
+  position: relative;
 }
 
-.topnav a:hover,
-.topnav a.active{
-  background: var(--card);
+.topnav a:hover {
   color: var(--text);
+  background: var(--card);
+}
+
+/* Aktivni link – označava sekciju u kojoj se nalaziš */
+.topnav a.active {
+  color: var(--accent, #4da3ff);
+  background: color-mix(in oklab, var(--card) 90%, transparent);
+  font-weight: 600;
 }
 .to-top{
   position: fixed; right: 16px; bottom: 16px; z-index: 999;
@@ -197,6 +204,16 @@ a{color:inherit; text-decoration:none}
 @keyframes debugFade {
   from { outline-color: color-mix(in oklab, var(--accent) 80%, white); }
   to   { outline-color: transparent; }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 

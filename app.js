@@ -275,3 +275,40 @@
 
   sections.forEach(s => io.observe(s));
 })();
+// === Active nav link on scroll ===
+(function() {
+  const links = document.querySelectorAll('.topnav a[href^="#"]');
+  const sections = Array.from(links).map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+
+  function onScroll() {
+    const scrollY = window.scrollY + window.innerHeight / 3;
+    let current = null;
+    for (const sec of sections) {
+      const rect = sec.getBoundingClientRect();
+      const top = rect.top + window.scrollY;
+      if (scrollY >= top) current = sec.id;
+    }
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${current}`));
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// === Fade-in on scroll ===
+(function() {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(entries => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target); // samo jednom
+      }
+    }
+  }, { threshold: 0.15 });
+
+  items.forEach(el => observer.observe(el));
+})();
+
