@@ -96,18 +96,31 @@ a{color:inherit; text-decoration:none}
 .reveal{opacity:0; transform:translateY(20px); transition: all .7s ease-out}
 .reveal.visible{opacity:1; transform:translateY(0)}
 .topnav{
-  position: sticky; top: 0; z-index: 1000;
-  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;            
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 16px 6px;
   background: color-mix(in oklab, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(1.3) blur(6px);
   border-bottom: 1px solid var(--card);
-  display: flex; gap: 16px; padding: 10px 16px; margin-bottom: 12px;
 }
+
 .topnav a{
-  padding: 6px 10px; border-radius: 10px; text-decoration: none;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-decoration: none;
   color: var(--text-muted);
+  transition: .2s ease;
 }
-.topnav a.active{ background: var(--card); color: var(--text); }
-.topnav a:hover{ color: var(--text); }
+.topnav a:hover,
+.topnav a.active{
+  background: var(--card);
+  color: var(--text);
+}
 .to-top{
   position: fixed; right: 16px; bottom: 16px; z-index: 999;
   padding: 10px 12px; border-radius: 12px; border: 1px solid var(--card);
