@@ -34,6 +34,37 @@
     el.classList.remove('visible');
     void el.offsetWidth; // reflow
   });
+  // === STAGGER REVEAL za kartice u #projects ===
+(function () {
+  const projectSection = document.getElementById('projects');
+  if (!projectSection) return;
+
+  // Sve kartice unutar projects
+  const cards = projectSection.querySelectorAll('.card');
+  if (!cards.length) return;
+
+  // Neka kartice imaju početno stanje (ako nemaju .reveal, mi ćemo koristiti .reveal-item)
+  cards.forEach((c, i) => {
+    c.classList.add('reveal-item');
+    // postavi “stagger” kašnjenje kroz CSS varijablu
+    c.style.setProperty('--d', `${i * 90}ms`); // 0ms, 90ms, 180ms...
+  });
+
+  // Posmatraj samo sekciju (kad uđe u viewport, upali sve kartice)
+  const obs = new IntersectionObserver(
+    (entries, o) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          cards.forEach((c) => c.classList.add('visible'));
+          o.unobserve(e.target); // jednom i gotovo
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+  );
+
+  obs.observe(projectSection);
+})();
 
   // Posmatraj sekcije i dodaj 'visible' kada uđu u viewport
   const obs = new IntersectionObserver(
@@ -128,5 +159,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' })
   );
 })();
+
 
 // === END OF app.js ===

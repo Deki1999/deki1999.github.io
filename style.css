@@ -115,3 +115,26 @@ a{color:inherit; text-decoration:none}
   transition: opacity .2s ease;
 }
 .to-top.show{ opacity: 1; pointer-events: auto; }
+/* === Cards: hover/focus lift === */
+.card {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  will-change: transform;
+}
+.card:hover,
+.card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+  border-color: var(--accent);
+}
+
+/* === Stagger reveal za kartice === */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+  transition-delay: var(--d, 0ms);
+}
+.reveal-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
