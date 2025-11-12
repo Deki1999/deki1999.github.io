@@ -28,6 +28,25 @@
 (function () {
   const items = document.querySelectorAll('.reveal');
   if (!items.length) return;
+  
+  // === Viewport debug highlight (sections) ===
+(function(){
+  const sections = ['about','projects','contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if(!sections.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      e.target.classList.add('debug-enter');
+      setTimeout(() => e.target.classList.remove('debug-enter'), 600);
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+  sections.forEach(s => io.observe(s));
+})();
 
   // Reset početno stanje
   items.forEach((el) => {
@@ -188,5 +207,37 @@
   );
 })();
 
-
 // === END OF app.js ===
+
+// === Scroll progress bar ===
+(function(){
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+
+  let ticking = false;
+  const doc = document.documentElement;
+
+  const getScrollY = () =>
+    window.pageYOffset || doc.scrollTop || document.body.scrollTop || 0;
+
+  function update() {
+    const scrolled = getScrollY();
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? Math.min(100, Math.max(0, (scrolled / max) * 100)) : 0;
+    bar.style.backgroundSize = `${pct}% 100%`;
+    ticking = false;
+  }
+
+  function onChange() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }
+
+  update();
+  window.addEventListener('scroll', onChange, { passive: true });
+  window.addEventListener('resize', onChange, { passive: true });
+  window.addEventListener('orientationchange', onChange, { passive: true });
+  window.addEventListener('load', onChange);
+})();
