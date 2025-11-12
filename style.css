@@ -138,3 +138,14 @@ a{color:inherit; text-decoration:none}
   opacity: 1;
   transform: translateY(0);
 }
+/* === Stagger reveal za About chips === */
+.chip.reveal-chip {
+  opacity: 0;
+  transform: translateY(8px) scale(.98);
+  transition: opacity .45s ease, transform .45s ease;
+  transition-delay: var(--d, 0ms); /* setuje se iz JS-a */
+}
+.chip.reveal-chip.visible {
+  opacity: 1;
+  transform: none;
+}

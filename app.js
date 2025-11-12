@@ -65,6 +65,34 @@
 
   obs.observe(projectSection);
 })();
+// === STAGGER REVEAL za chips u #about ===
+(function () {
+  const about = document.getElementById('about');
+  if (!about) return;
+
+  const chips = about.querySelectorAll('.chips .chip');
+  if (!chips.length) return;
+
+  // početno stanje + kašnjenje po čipu
+  chips.forEach((el, i) => {
+    el.classList.add('reveal-chip');
+    el.style.setProperty('--d', `${i * 80}ms`);
+  });
+
+  const obs = new IntersectionObserver(
+    (entries, o) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          chips.forEach((c) => c.classList.add('visible'));
+          o.unobserve(e.target); // jednokratno
+        }
+      });
+    },
+    { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
+  );
+
+  obs.observe(about);
+})();
 
   // Posmatraj sekcije i dodaj 'visible' kada uđu u viewport
   const obs = new IntersectionObserver(
