@@ -241,3 +241,37 @@
   window.addEventListener('orientationchange', onChange, { passive: true });
   window.addEventListener('load', onChange);
 })();
+// === Scroll progress bar ===
+(function(){
+  const bar = document.getElementById('scrollProgress');
+  if(!bar) return;
+
+  const update = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    bar.style.backgroundSize = `${pct}% 100%`;
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+})();
+
+// === Viewport debug highlight (About/Projects/Contact) ===
+(function(){
+  const sections = ['about','projects','contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if(!sections.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      e.target.classList.add('debug-enter');
+      setTimeout(() => e.target.classList.remove('debug-enter'), 600);
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+  sections.forEach(s => io.observe(s));
+})();
