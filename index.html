@@ -46,8 +46,12 @@
   <main class="container">
     <!-- === Hero === -->
     <section class="hero">
-      <img class="avatar" src="https://github.com/Deki1999.png?size=120" alt="Dejan Stevanović" />
-      <div class="hero-body">
+  <div class="avatar-ring">
+    <img class="avatar" src="https://github.com/Deki1999.png?size=120" alt="Dejan Stevanović" />
+  </div>
+
+  <div class="hero-body">
+    ...
         <h1>Hi, I’m Dejan 👋</h1>
         <p>Beginner web developer learning <b>HTML</b>, <b>CSS</b> and <b>JavaScript</b>.</p>
         <div class="actions">
@@ -71,37 +75,49 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="grid reveal">
-      <!-- Typing Test -->
-      <article class="card">
-        <h3>Typing Test</h3>
-        <p>Live WPM & accuracy, 10/30/60s, pause/resume, progress bar, sound toggle.</p>
-        <div class="actions">
-          <a class="btn" target="_blank" href="https://deki1999.github.io/typing-test/">Live</a>
-          <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/typing-test">Code</a>
-        </div>
-      </article>
+<section id="projects" class="projects reveal">
+  <div class="projects-header">
+    <h2>Projects</h2>
+    <div class="project-filters">
+      <button class="pill active" data-filter="all">All</button>
+      <button class="pill" data-filter="ui">UI</button>
+      <button class="pill" data-filter="api">API</button>
+      <button class="pill" data-filter="storage">Storage</button>
+    </div>
+  </div>
 
-      <!-- Weather App -->
-      <article class="card">
-        <h3>Weather App</h3>
-        <p>Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.</p>
-        <div class="actions">
-          <a class="btn" target="_blank" href="https://deki1999.github.io/weather-app/">Live</a>
-          <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/weather-app">Code</a>
-        </div>
-      </article>
+  <div class="grid">
+    <!-- Typing Test -->
+    <article class="card" data-tags="ui typing">
+      <h3>Typing Test</h3>
+      <p>Live WPM & accuracy, 10/30/60s, pause/resume, progress bar, sound toggle.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/typing-test/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/typing-test">Code</a>
+      </div>
+    </article>
 
-      <!-- Notes App -->
-      <article class="card">
-        <h3>Notes App</h3>
-        <p>CRUD, tags, colors, pin, search/sort, export/import, markdown, undo/redo.</p>
-        <div class="actions">
-          <a class="btn" target="_blank" href="https://deki1999.github.io/notes-app/">Live</a>
-          <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/notes-app">Code</a>
-        </div>
-      </article>
-    </section>
+    <!-- Weather App -->
+    <article class="card" data-tags="api ui">
+      <h3>Weather App</h3>
+      <p>Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/weather-app/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/weather-app">Code</a>
+      </div>
+    </article>
+
+    <!-- Notes App -->
+    <article class="card" data-tags="storage ui">
+      <h3>Notes App</h3>
+      <p>LocalStorage persistence, search, pin, delete, responsive layout.</p>
+      <div class="actions">
+        <a class="btn" target="_blank" href="https://deki1999.github.io/notes-app/">Live</a>
+        <a class="btn ghost" target="_blank" href="https://github.com/Deki1999/notes-app">Code</a>
+      </div>
+    </article>
+  </div>
+</section>
 
     <!-- Contact -->
     <section id="contact" class="contact reveal">
