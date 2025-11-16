@@ -1,270 +1,286 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
-<head>
-  <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-/>
-  <title>Dejan · Projects</title>
-  <meta
-    name="description"
-    content="Dejan Stevanović · Beginner web developer building small interactive apps with HTML, CSS and JavaScript and deploying them on GitHub Pages."
-  />
+  <head>
+    <meta charset="utf-8" />
+    <title>Dejan Stevanović · Web Developer</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <meta
+      name="description"
+      content="Beginner web developer learning HTML, CSS and JavaScript. Building small interactive apps and deploying them on GitHub Pages."
+    />
 
-  <!-- Open Graph (za link preview na WhatsApp / Discord / Slack / LinkedIn) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dejan Stevanović · Web Developer" />
-  <meta
-    property="og:description"
-    content="Frontend / Web developer fokusiran na HTML, CSS i JavaScript. Pogledaj moje male, ali ispolirane projekte."
-  />
-  <meta property="og:url" content="https://deki1999.github.io/" />
-  <!-- 👉 OVDJE PAZI NA PUTANJU SLIKE -->
-  <meta
-    property="og:image"
-    content="https://deki1999.github.io/img/preview.png"
-/>
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:type" content="image/png" />
+    <!-- Open Graph / link preview -->
+    <meta property="og:title" content="Dejan Stevanović · Web Developer" />
+    <meta
+      property="og:description"
+      content="Beginner web developer learning HTML, CSS and JavaScript. Building small interactive apps and deploying them on GitHub Pages."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://deki1999.github.io/" />
+    <meta
+      property="og:image"
+      content="https://deki1999.github.io/img/preview.png"
+    />
 
-  <!-- Twitter / X kartica -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dejan Stevanović · Web Developer" />
-  <meta
-    name="twitter:description"
-    content="Frontend / Web developer fokusiran na HTML, CSS i JavaScript. Pogledaj moje projekte."
-  />
-  <meta
-    name="twitter:image"
-    content="https://deki1999.github.io/img/preview.png"
-/>
+    <!-- Twitter card (optional, ali fino je imati) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dejan Stevanović · Web Developer" />
+    <meta
+      name="twitter:description"
+      content="Beginner web developer learning HTML, CSS and JavaScript. Building small interactive apps and deploying them on GitHub Pages."
+    />
+    <meta
+      name="twitter:image"
+      content="https://deki1999.github.io/img/preview.png"
+    />
 
-  <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-  <!-- Scroll progress bar -->
-  <div id="scrollProgress"></div>
+    <link rel="icon" href="img/preview.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Scroll progress bar -->
+    <div id="scrollProgress"></div>
 
-  <!-- Sticky nav -->
-<div class="topnav">
-  <a href="#about">About</a>
-  <a href="#projects">Projects</a>
-  <a href="#contact">Contact</a>
+    <!-- Sticky nav -->
+    <nav>
+      <div class="topnav">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
 
-  <button id="themeToggle" class="btn ghost small">🌙</button>
-</div>
-  <!-- Theme toggle dugme -->
-  <button id="themeToggle" class="btn ghost small" type="button">
-    Dark
-  </button>
-</nav>
-
-  <main class="container">
-    <!-- Hero -->
-    <section id="hero" class="hero reveal">
-      <div class="avatar-ring">
-        <img
-          class="avatar"
-          src="https://github.com/Deki1999.png?size=160"
-          alt="Dejan Stevanović"
-/>
+        <!-- Theme toggle dugme (Dark / Light) -->
+        <button
+          id="themeToggle"
+          class="btn ghost small"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          🌙
+        </button>
       </div>
-      <div class="hero-body">
-        <h1>Hi, I’m Dejan 👋</h1>
+    </nav>
+
+    <main class="container">
+      <!-- Hero -->
+      <section id="hero" class="hero reveal">
+        <div class="avatar-ring">
+          <img
+            class="avatar"
+            src="https://github.com/Deki1999.png?size=160"
+            alt="Dejan Stevanović"
+          />
+        </div>
+
+        <div class="hero-body">
+          <h1>Hi, I'm Dejan 👋</h1>
+          <p>
+            Beginner web developer learning <b>HTML</b>, <b>CSS</b> and
+            <b>JavaScript</b>. I enjoy building small interactive apps and
+            deploying them on GitHub Pages.
+          </p>
+
+          <div class="actions">
+            <a class="btn" href="#projects">View Projects</a>
+            <a
+              class="btn ghost"
+              href="https://github.com/Deki1999"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="about reveal">
+        <h2>About Me</h2>
         <p>
-          Beginner web developer learning
-          <b>HTML</b>,
-          <b>CSS</b> and
-          <b>JavaScript</b>. I enjoy building small interactive apps and
-          deploying them on GitHub Pages.
+          I'm Dejan — a beginner web developer. I enjoy building small
+          interactive apps and deploying them on GitHub Pages. Learning every
+          day and focusing on clean UI and simple code.
         </p>
-        <div class="actions">
-          <a class="btn" href="#projects">View Projects</a>
-          <a
-            class="btn ghost"
-            target="_blank"
-            href="https://github.com/Deki1999"
-          >GitHub</a>
+
+        <div class="chips">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Git</span>
+          <span class="chip">GitHub Pages</span>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- About -->
-    <section id="about" class="about reveal">
-      <h2>About Me</h2>
-      <p>
-        I’m Dejan — a beginner web developer. I enjoy building small interactive
-        apps and deploying them on GitHub Pages. Learning every day and
-        focusing on clean UI and simple code.
-      </p>
-      <div class="chips">
-        <span class="chip reveal-chip" style="--d:0ms">HTML</span>
-        <span class="chip reveal-chip" style="--d:80ms">CSS</span>
-        <span class="chip reveal-chip" style="--d:160ms">JavaScript</span>
-        <span class="chip reveal-chip" style="--d:240ms">Git</span>
-        <span class="chip reveal-chip" style="--d:320ms">GitHub Pages</span>
-      </div>
-    </section>
+      <!-- Projects -->
+      <section id="projects" class="projects reveal">
+        <div class="projects-header">
+          <h2>Projects</h2>
 
-    <!-- Projects -->
-    <section id="projects" class="projects reveal">
-      <div class="projects-header">
-        <h2>Projects</h2>
-        <div class="project-filters">
-          <button class="pill active" data-filter="all">All</button>
-          <button class="pill" data-filter="ui">UI</button>
-          <button class="pill" data-filter="api">API</button>
-          <button class="pill" data-filter="storage">Storage</button>
+          <div class="project-filters">
+            <button class="pill active" data-filter="all">All</button>
+            <button class="pill" data-filter="ui">UI</button>
+            <button class="pill" data-filter="api">API</button>
+            <button class="pill" data-filter="storage">Storage</button>
+          </div>
         </div>
-      </div>
 
-      <div class="grid">
-        <!-- Typing Test -->
-        <article class="card reveal-item" data-tags="ui typing">
-          <h3>Typing Test</h3>
-          <p>
-            Live WPM &amp; accuracy, 10/30/60s, pause/resume, progress bar,
-            sound toggle.
-          </p>
-          <div class="actions">
-            <a
-              class="btn"
-              target="_blank"
-              href="https://deki1999.github.io/typing-test/"
-            >Live</a>
+        <div class="grid">
+          <!-- Typing Test -->
+          <article class="card" data-tags="ui typing">
+            <h3>Typing Test</h3>
+            <p>
+              Live WPM &amp; accuracy, 10/30/60s, pause/resume, progress bar,
+              sound toggle.
+            </p>
+            <div class="actions">
+              <a
+                class="btn"
+                href="https://deki1999.github.io/typing-test/"
+                target="_blank"
+                rel="noreferrer"
+                >Live</a
+              >
+              <a
+                class="btn ghost"
+                href="https://github.com/Deki1999/typing-test"
+                target="_blank"
+                rel="noreferrer"
+                >Code</a
+              >
+            </div>
+          </article>
+
+          <!-- Weather App -->
+          <article class="card" data-tags="api ui">
+            <h3>Weather App</h3>
+            <p>
+              Open-Meteo API, geolocation &amp; search, icons, °C/°F toggle, 24h
+              chart.
+            </p>
+            <div class="actions">
+              <a
+                class="btn"
+                href="https://deki1999.github.io/weather-app/"
+                target="_blank"
+                rel="noreferrer"
+                >Live</a
+              >
+              <a
+                class="btn ghost"
+                href="https://github.com/Deki1999/weather-app"
+                target="_blank"
+                rel="noreferrer"
+                >Code</a
+              >
+            </div>
+          </article>
+
+          <!-- Notes App -->
+          <article class="card" data-tags="storage ui">
+            <h3>Notes App</h3>
+            <p>
+              LocalStorage persistence, search, pin, delete, responsive layout.
+            </p>
+            <div class="actions">
+              <a
+                class="btn"
+                href="https://deki1999.github.io/notes-app/"
+                target="_blank"
+                rel="noreferrer"
+                >Live</a
+              >
+              <a
+                class="btn ghost"
+                href="https://github.com/Deki1999/notes-app"
+                target="_blank"
+                rel="noreferrer"
+                >Code</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="contact reveal">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out — I'll reply as soon as I can.</p>
+
+        <form
+          id="contactForm"
+          class="form"
+          action="https://formspree.io/f/mwpaeqrj"
+          method="POST"
+        >
+          <div class="row">
+            <div>
+              <label for="name" class="muted">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="email" class="muted">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@mail.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="message" class="muted">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Your message..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="end">
+            <button type="submit" class="btn">Send</button>
             <a
               class="btn ghost"
-              target="_blank"
-              href="https://github.com/Deki1999/typing-test"
-            >Code</a>
+              href="mailto:dejan.stevanovic.dev@mail.com?subject=Hello%20Dejan"
+              >Open email</a
+            >
           </div>
-        </article>
 
-        <!-- Weather App -->
-        <article class="card reveal-item" data-tags="api ui">
-          <h3>Weather App</h3>
-          <p>
-            Open-Meteo API, geolocation &amp; search, icons, °C/°F toggle, 24h
-            chart.
+          <p class="tip">
+            This form uses Formspree — you'll get the message in your inbox.
           </p>
-          <div class="actions">
-            <a
-              class="btn"
-              target="_blank"
-              href="https://deki1999.github.io/weather-app/"
-            >Live</a>
-            <a
-              class="btn ghost"
-              target="_blank"
-              href="https://github.com/Deki1999/weather-app"
-            >Code</a>
-          </div>
-        </article>
+        </form>
+      </section>
 
-        <!-- Notes App -->
-        <article class="card reveal-item" data-tags="storage ui">
-          <h3>Notes App</h3>
-          <p>
-            LocalStorage persistence, search, pin, delete, responsive layout.
-          </p>
-          <div class="actions">
-            <a
-              class="btn"
-              target="_blank"
-              href="https://deki1999.github.io/notes-app/"
-            >Live</a>
-            <a
-              class="btn ghost"
-              target="_blank"
-              href="https://github.com/Deki1999/notes-app"
-            >Code</a>
-          </div>
-        </article>
-      </div>
-    </section>
+      <footer class="foot">
+        <p class="muted">
+          © 2025 Dejan · Built with vanilla HTML/CSS/JS
+        </p>
+      </footer>
+    </main>
 
-    <!-- Contact -->
-    <section id="contact" class="contact reveal">
-      <h2>Contact Me</h2>
-      <p>
-        Feel free to reach out — I’ll reply as soon as I can.
-      </p>
+    <!-- Back to top button -->
+    <button
+      id="toTop"
+      class="to-top"
+      type="button"
+      aria-label="Back to top"
+    >
+      Top
+    </button>
 
-      <form
-        id="contactForm"
-        class="form"
-        action="https://formspree.io/f/mwpaerqi"
-        method="POST"
-      >
-        <div class="row">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your name"
-            autocomplete="name"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your email"
-            autocomplete="email"
-            required
-          />
-        </div>
-
-        <textarea
-          name="message"
-          rows="5"
-          placeholder="Your message..."
-          required
-        ></textarea>
-
-        <!-- honeypot -->
-        <input
-          type="text"
-          name="_gotcha"
-          style="display:none"
-          tabindex="-1"
-          autocomplete="off"
-/>
-
-        <!-- Formspree meta -->
-        <input type="hidden" name="_subject" value="Portfolio contact" />
-        <input type="hidden" name="_replyto" value="" />
-        <input
-          type="hidden"
-          name="_next"
-          value="https://deki1999.github.io/?contact=thanks"
-/>
-
-        <div class="end">
-          <button type="submit" class="btn" id="sendBtn">Send</button>
-          <a
-            class="btn ghost"
-            href="mailto:stevanovdejang999@gmail.com"
-          >Open email</a>
-        </div>
-
-        <div id="formTip" class="tip" role="status" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <!-- Footer -->
-    <footer class="foot">
-      <p class="muted">
-        © <span id="year"></span> Dejan · Built with vanilla HTML/CSS/JS
-      </p>
-    </footer>
-  </main>
-
-  <!-- Back to top button -->
-  <button id="toTop" class="to-top" aria-label="Back to top">
-    Top
-  </button>
-
-  <script src="./app.js"></script>
-</body>
+    <script src="./app.js"></script>
+  </body>
 </html>
