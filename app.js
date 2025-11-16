@@ -27,6 +27,37 @@
 
   applyTheme(getTheme());
 })();
+/* ==============================
+   THEME TOGGLE BUTTON (Dark ↔ Light)
+================================= */
+(function () {
+  const KEY = "site.theme";
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+
+  if (!btn) return;
+
+  function applyTheme(t) {
+    root.setAttribute("data-theme", t);
+    localStorage.setItem(KEY, t);
+    btn.textContent = t === "light" ? "🌙" : "☀️";
+  }
+
+  function getTheme() {
+    return (
+      localStorage.getItem(KEY) ||
+      (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
+    );
+  }
+
+  // Init
+  applyTheme(getTheme());
+
+  btn.addEventListener("click", () => {
+    const current = root.getAttribute("data-theme");
+    applyTheme(current === "light" ? "dark" : "light");
+  });
+})();
 
 /* =====================================================
    SCROLL REVEAL (fade-in)
