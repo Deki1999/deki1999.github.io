@@ -127,6 +127,15 @@ a {
   opacity: .6;
   cursor: not-allowed;
 }
+.btn.small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+/* Theme toggle dugme u topnavu ide desno */
+.topnav #themeToggle {
+  margin-left: auto;
+}
 
 /* ==== Chips ==== */
 .chips {
@@ -152,6 +161,21 @@ a {
   gap: 16px;
   align-items: center;
   margin-bottom: 26px;
+}
+/* Hero intro animacija na load */
+@keyframes heroIntro {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero {
+  animation: heroIntro 0.7s ease-out;
 }
 
 /* Animirani gradient prsten oko avatara */

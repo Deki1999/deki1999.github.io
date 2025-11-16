@@ -1,250 +1,142 @@
-// === THEME AUTO-APPLY (no button version) ===
+/* =====================================================
+   THEME AUTO-APPLY (no button)
+===================================================== */
 (function () {
-  const KEY = 'site.theme';
+  const KEY = "site.theme";
   const root = document.documentElement;
 
   function getTheme() {
     try {
       return (
         localStorage.getItem(KEY) ||
-        (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+        (matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark")
       );
-    } catch (_) {
-      return 'dark';
+    } catch {
+      return "dark";
     }
   }
 
   function applyTheme(t) {
-    root.setAttribute('data-theme', t);
+    root.setAttribute("data-theme", t);
     try {
       localStorage.setItem(KEY, t);
-    } catch (_) {}
+    } catch {}
   }
 
   applyTheme(getTheme());
 })();
 
-// === SCROLL REVEAL (fade-in on scroll) ===
+/* =====================================================
+   SCROLL REVEAL (fade-in)
+===================================================== */
 (function () {
-  const items = document.querySelectorAll('.reveal');
+  const items = document.querySelectorAll(".reveal");
   if (!items.length) return;
-  
-  // === Viewport debug highlight (sections) ===
-(function(){
-  const sections = ['about','projects','contact']
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
 
-  if(!sections.length) return;
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(!e.isIntersecting) return;
-      e.target.classList.add('debug-enter');
-      setTimeout(() => e.target.classList.remove('debug-enter'), 600);
-    });
-  }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
-
-  sections.forEach(s => io.observe(s));
-})();
-
-  // Reset početno stanje
-  items.forEach((el) => {
-    el.classList.remove('visible');
-    void el.offsetWidth; // reflow
-  });
-  // === STAGGER REVEAL za kartice u #projects ===
-(function () {
-  const projectSection = document.getElementById('projects');
-  if (!projectSection) return;
-
-  // Sve kartice unutar projects
-  const cards = projectSection.querySelectorAll('.card');
-  if (!cards.length) return;
-
-  // Neka kartice imaju početno stanje (ako nemaju .reveal, mi ćemo koristiti .reveal-item)
-  cards.forEach((c, i) => {
-    c.classList.add('reveal-item');
-    // postavi “stagger” kašnjenje kroz CSS varijablu
-    c.style.setProperty('--d', `${i * 90}ms`); // 0ms, 90ms, 180ms...
-  });
-
-  // Posmatraj samo sekciju (kad uđe u viewport, upali sve kartice)
-  const obs = new IntersectionObserver(
-    (entries, o) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          cards.forEach((c) => c.classList.add('visible'));
-          o.unobserve(e.target); // jednom i gotovo
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
-  );
-
-  obs.observe(projectSection);
-})();
-// === STAGGER REVEAL za chips u #about ===
-(function () {
-  const about = document.getElementById('about');
-  if (!about) return;
-
-  const chips = about.querySelectorAll('.chips .chip');
-  if (!chips.length) return;
-
-  // početno stanje + kašnjenje po čipu
-  chips.forEach((el, i) => {
-    el.classList.add('reveal-chip');
-    el.style.setProperty('--d', `${i * 80}ms`);
-  });
-
-  const obs = new IntersectionObserver(
-    (entries, o) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          chips.forEach((c) => c.classList.add('visible'));
-          o.unobserve(e.target); // jednokratno
-        }
-      });
-    },
-    { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
-  );
-
-  obs.observe(about);
-})();
-
-  // Posmatraj sekcije i dodaj 'visible' kada uđu u viewport
-  const obs = new IntersectionObserver(
-    (entries, o) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          o.unobserve(e.target); // jednom po elementu
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
-  );
-
-  items.forEach((el) => obs.observe(el));
-})();
-
-// === CONTACT FORM (Formspree) ===
-(function () {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-
-    try {
-      const res = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: { Accept: 'application/json' },
-      });
-      if (res.ok) {
-        alert('Thanks for your message!');
-        form.reset();
-      } else {
-        alert('There was a problem submitting your form.');
-      }
-    } catch {
-      alert('Network error — please try again later.');
-    }
-  });
-})();
-
-// === STICKY NAV + SCROLLSPY ===
-(function () {
-  const links = [...document.querySelectorAll('.topnav a')];
-  if (!links.length) return;
-
-  const targets = links
-    .map((a) => document.querySelector(a.getAttribute('href')))
-    .filter(Boolean);
-
-  // IntersectionObserver za sekcije
-  const spy = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
         if (e.isIntersecting) {
-          const id = `#${e.target.id}`;
-          links.forEach((a) =>
-            a.classList.toggle('active', a.getAttribute('href') === id)
-          );
+          e.target.classList.add("visible");
+          observer.unobserve(e.target);
         }
       });
     },
-    { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+    { threshold: 0.15 }
   );
 
-  targets.forEach((el) => spy.observe(el));
-
-  // Klik na link — odmah aktiviraj
-  links.forEach((a) =>
-    a.addEventListener('click', () => {
-      links.forEach((l) => l.classList.toggle('active', l === a));
-    })
-  );
+  items.forEach((el) => observer.observe(el));
 })();
 
-// === BACK-TO-TOP BUTTON ===
+/* =====================================================
+   DEBUG HIGHLIGHT for sections
+===================================================== */
 (function () {
-  const btn = document.getElementById('toTop');
-  if (!btn) return;
+  const sections = ["about", "projects", "contact"]
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
 
-  const toggleBtn = () => {
-    if (window.scrollY > 300) btn.classList.add('show');
-    else btn.classList.remove('show');
-  };
-  toggleBtn();
+  if (!sections.length) return;
 
-  window.addEventListener('scroll', toggleBtn, { passive: true });
-  btn.addEventListener('click', () =>
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("debug-enter");
+          setTimeout(() => e.target.classList.remove("debug-enter"), 600);
+        }
+      });
+    },
+    { threshold: 0.2 }
   );
+
+  sections.forEach((sec) => observer.observe(sec));
 })();
 
-// === END OF app.js ===
+/* =====================================================
+   STAGGER REVEAL — project cards
+===================================================== */
+(function () {
+  const section = document.getElementById("projects");
+  if (!section) return;
 
-// === Scroll progress bar ===
-(function(){
-  const bar = document.getElementById('scrollProgress');
+  const cards = section.querySelectorAll(".card");
+  cards.forEach((c, i) => {
+    c.classList.add("reveal-item");
+    c.style.setProperty("--d", `${i * 90}ms`);
+  });
+
+  const io = new IntersectionObserver(
+    (entries, o) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          cards.forEach((c) => c.classList.add("visible"));
+          o.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  io.observe(section);
+})();
+
+/* =====================================================
+   STAGGER REVEAL — chips in About
+===================================================== */
+(function () {
+  const about = document.getElementById("about");
+  if (!about) return;
+
+  const chips = about.querySelectorAll(".chip");
+  chips.forEach((chip, i) => {
+    chip.classList.add("reveal-chip");
+    chip.style.setProperty("--d", `${i * 80}ms`);
+  });
+
+  const io = new IntersectionObserver(
+    (entries, o) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          chips.forEach((c) => c.classList.add("visible"));
+          o.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  io.observe(about);
+})();
+
+/* =====================================================
+   SCROLL PROGRESS BAR
+===================================================== */
+(function () {
+  const bar = document.getElementById("scrollProgress");
   if (!bar) return;
-
-  let ticking = false;
-  const doc = document.documentElement;
-
-  const getScrollY = () =>
-    window.pageYOffset || doc.scrollTop || document.body.scrollTop || 0;
-
-  function update() {
-    const scrolled = getScrollY();
-    const max = doc.scrollHeight - doc.clientHeight;
-    const pct = max > 0 ? Math.min(100, Math.max(0, (scrolled / max) * 100)) : 0;
-    bar.style.backgroundSize = `${pct}% 100%`;
-    ticking = false;
-  }
-
-  function onChange() {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(update);
-    }
-  }
-
-  update();
-  window.addEventListener('scroll', onChange, { passive: true });
-  window.addEventListener('resize', onChange, { passive: true });
-  window.addEventListener('orientationchange', onChange, { passive: true });
-  window.addEventListener('load', onChange);
-})();
-// === Scroll progress bar ===
-(function(){
-  const bar = document.getElementById('scrollProgress');
-  if(!bar) return;
 
   const update = () => {
     const h = document.documentElement;
@@ -252,104 +144,143 @@
     const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
     bar.style.backgroundSize = `${pct}% 100%`;
   };
+
   update();
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update, { passive: true });
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
 })();
-// === Active nav link on scroll ===
-(function() {
+
+/* =====================================================
+   ACTIVE NAV LINK (scrollspy)
+===================================================== */
+(function () {
   const links = document.querySelectorAll('.topnav a[href^="#"]');
-  const sections = Array.from(links).map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  const sections = Array.from(links)
+    .map((a) => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
 
   function onScroll() {
     const scrollY = window.scrollY + window.innerHeight / 3;
     let current = null;
+
     for (const sec of sections) {
-      const rect = sec.getBoundingClientRect();
-      const top = rect.top + window.scrollY;
+      const top = sec.offsetTop;
       if (scrollY >= top) current = sec.id;
     }
-    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${current}`));
+
+    links.forEach((a) =>
+      a.classList.toggle("active", a.getAttribute("href") === `#${current}`)
+    );
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 })();
 
-// === Fade-in on scroll ===
-(function() {
-  const items = document.querySelectorAll('.reveal');
-  if (!items.length) return;
+/* =====================================================
+   BACK TO TOP BUTTON
+===================================================== */
+(function () {
+  const btn = document.getElementById("toTop");
+  if (!btn) return;
 
-  const observer = new IntersectionObserver(entries => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target); // samo jednom
+  const toggle = () => {
+    if (window.scrollY > 300) btn.classList.add("show");
+    else btn.classList.remove("show");
+  };
+
+  window.addEventListener("scroll", toggle);
+  toggle();
+
+  btn.addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  );
+})();
+
+/* =====================================================
+   PROJECT FILTERS
+===================================================== */
+(function () {
+  const section = document.getElementById("projects");
+  if (!section) return;
+
+  const buttons = section.querySelectorAll(".pill");
+  const cards = section.querySelectorAll(".card");
+
+  const apply = (filter) => {
+    cards.forEach((card) => {
+      const tags = (card.dataset.tags || "").split(/\s+/);
+      card.hidden = !(filter === "all" || tags.includes(filter));
+    });
+  };
+
+  buttons.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      apply(btn.dataset.filter);
+    })
+  );
+
+  apply("all");
+})();
+
+/* =====================================================
+   CONTACT FORM — Formspree
+===================================================== */
+(function () {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        alert("Thanks for your message!");
+        form.reset();
+      } else {
+        alert("There was a problem submitting your form.");
       }
+    } catch {
+      alert("Network error — please try again later.");
     }
-  }, { threshold: 0.15 });
-
-  items.forEach(el => observer.observe(el));
-})();
-// === Project filters (All / UI / API / Storage) ===
-(function () {
-  const projects = document.getElementById('projects');
-  if (!projects) return;
-
-  const buttons = projects.querySelectorAll('.project-filters .pill');
-  const cards = projects.querySelectorAll('.grid .card');
-
-  function applyFilter(filter) {
-    cards.forEach(card => {
-      const tags = (card.dataset.tags || '').split(/\s+/);
-      const show = filter === 'all' || tags.includes(filter);
-      card.hidden = !show;
-    });
-  }
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
-      buttons.forEach(b => b.classList.toggle('active', b === btn));
-      applyFilter(filter);
-    });
   });
-
-  // init
-  applyFilter('all');
 })();
-// === Parallax efekt za hero avatar ===
-(function () {
-  // radi samo na uređajima sa "finim" pointerom (miš, trackpad)
-  if (!window.matchMedia || !matchMedia('(pointer: fine)').matches) return;
 
-  const hero = document.querySelector('.hero');
-  const avatar = document.querySelector('.hero .avatar');
+/* =====================================================
+   PARALLAX AVATAR
+===================================================== */
+(function () {
+  if (!matchMedia("(pointer: fine)").matches) return;
+
+  const hero = document.querySelector(".hero");
+  const avatar = document.querySelector(".avatar");
   if (!hero || !avatar) return;
 
-  const strength = 10; // max pomak u px
+  const strength = 10;
 
-  function handleMove(e) {
+  hero.addEventListener("mousemove", (e) => {
     const rect = hero.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    const rx = (y / rect.height - 0.5) * -1; // rotacija X
-    const ry = (x / rect.width - 0.5);      // rotacija Y
+    avatar.style.transform = `
+      translate3d(${x * strength}px, ${y * strength}px, 0)
+      rotateX(${y * -6}deg)
+      rotateY(${x * 6}deg)
+    `;
+  });
 
-    const tx = (x / rect.width - 0.5) * strength;
-    const ty = (y / rect.height - 0.5) * strength;
-
-    avatar.style.transform =
-      `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx * 6}deg) rotateY(${ry * 6}deg)`;
-  }
-
-  function reset() {
-    avatar.style.transform = 'translate3d(0,0,0) rotateX(0deg) rotateY(0deg)';
-  }
-
-  hero.addEventListener('mousemove', handleMove);
-  hero.addEventListener('mouseleave', reset);
+  hero.addEventListener("mouseleave", () => {
+    avatar.style.transform = "translate3d(0,0,0) rotateX(0deg) rotateY(0deg)";
+  });
 })();
-
