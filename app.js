@@ -311,4 +311,64 @@
 
   items.forEach(el => observer.observe(el));
 })();
+// === Project filters (All / UI / API / Storage) ===
+(function () {
+  const projects = document.getElementById('projects');
+  if (!projects) return;
+
+  const buttons = projects.querySelectorAll('.project-filters .pill');
+  const cards = projects.querySelectorAll('.grid .card');
+
+  function applyFilter(filter) {
+    cards.forEach(card => {
+      const tags = (card.dataset.tags || '').split(/\s+/);
+      const show = filter === 'all' || tags.includes(filter);
+      card.hidden = !show;
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach(b => b.classList.toggle('active', b === btn));
+      applyFilter(filter);
+    });
+  });
+
+  // init
+  applyFilter('all');
+})();
+// === Parallax efekt za hero avatar ===
+(function () {
+  // radi samo na uređajima sa "finim" pointerom (miš, trackpad)
+  if (!window.matchMedia || !matchMedia('(pointer: fine)').matches) return;
+
+  const hero = document.querySelector('.hero');
+  const avatar = document.querySelector('.hero .avatar');
+  if (!hero || !avatar) return;
+
+  const strength = 10; // max pomak u px
+
+  function handleMove(e) {
+    const rect = hero.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rx = (y / rect.height - 0.5) * -1; // rotacija X
+    const ry = (x / rect.width - 0.5);      // rotacija Y
+
+    const tx = (x / rect.width - 0.5) * strength;
+    const ty = (y / rect.height - 0.5) * strength;
+
+    avatar.style.transform =
+      `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx * 6}deg) rotateY(${ry * 6}deg)`;
+  }
+
+  function reset() {
+    avatar.style.transform = 'translate3d(0,0,0) rotateX(0deg) rotateY(0deg)';
+  }
+
+  hero.addEventListener('mousemove', handleMove);
+  hero.addEventListener('mouseleave', reset);
+})();
 
