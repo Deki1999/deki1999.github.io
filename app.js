@@ -256,25 +256,6 @@
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update, { passive: true });
 })();
-
-// === Viewport debug highlight (About/Projects/Contact) ===
-(function(){
-  const sections = ['about','projects','contact']
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
-
-  if(!sections.length) return;
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(!e.isIntersecting) return;
-      e.target.classList.add('debug-enter');
-      setTimeout(() => e.target.classList.remove('debug-enter'), 600);
-    });
-  }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
-
-  sections.forEach(s => io.observe(s));
-})();
 // === Active nav link on scroll ===
 (function() {
   const links = document.querySelectorAll('.topnav a[href^="#"]');
