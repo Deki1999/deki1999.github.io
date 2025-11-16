@@ -6,30 +6,80 @@
   --muted: #a9b5c6;
   --border: #223147;
   --accent: #78b6ff;
-  --shadow: 0 12px 40px rgba(0,0,0,.35);
+  --shadow: 0 12px 40px rgba(0, 0, 0, .35);
 }
-html[data-theme='light']{
-  --bg:#f5f7fb; --card:#fff; --text:#0f1623; --muted:#5c6b80; --border:#e6ecf5; --accent:#0b84ff; --shadow:0 8px 30px rgba(0,0,0,.08);
+
+html[data-theme='light'] {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #0f1623;
+  --muted: #5c6b80;
+  --border: #e6ecf5;
+  --accent: #0b84ff;
+  --shadow: 0 8px 30px rgba(0, 0, 0, .08);
 }
-html { scroll-behavior: smooth; }
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* ==== Base ==== */
-*{box-sizing:border-box}
-html,body{height:100%}
-/* Scroll offset za sve sekcije sa id-om */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Scroll offset za sve sekcije sa id-om (zbog sticky nav-a) */
 section[id] {
   scroll-margin-top: 80px;
 }
-body{
-  margin:0; background:var(--bg); color:var(--text);
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
   font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
-h1,h2,h3{line-height:1.25; margin:0 0 .5rem}
-h1{font-size:clamp(28px, 3.5vw, 36px)}
-h2{font-size:clamp(22px, 2.8vw, 26px); margin-top:10px}
-h3{font-size:20px}
-p{margin:.4rem 0 1rem; color:var(--muted)}
-a{color:inherit; text-decoration:none}
-.container{max-width:980px; margin:0 auto; padding:32px 16px 56px}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  margin: 0 0 .5rem;
+}
+
+h1 {
+  font-size: clamp(28px, 3.5vw, 36px);
+}
+
+h2 {
+  font-size: clamp(22px, 2.8vw, 26px);
+  margin-top: 10px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+p {
+  margin: .4rem 0 1rem;
+  color: var(--muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 16px 56px;
+}
 
 /* ==== Buttons ==== */
 .btn {
@@ -44,7 +94,7 @@ a{color:inherit; text-decoration:none}
   color: #081424;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 0 0 0 rgba(120, 182, 255, 0.0);
+  box-shadow: 0 0 0 0 rgba(120, 182, 255, 0);
   transition:
     transform 0.15s ease-in-out,
     box-shadow 0.2s ease-out,
@@ -63,33 +113,47 @@ a{color:inherit; text-decoration:none}
   outline: 2px solid rgba(120, 182, 255, 0.9);
   outline-offset: 2px;
 }
-.btn.ghost{background:transparent; color:var(--text)}
-.btn.ghost:hover{background:rgba(255,255,255,.06)}
-.btn:disabled{opacity:.6; cursor:not-allowed}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+}
+
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, .06);
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
 
 /* ==== Chips ==== */
-.chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
-.chip{
-  font-size:.85rem; padding:6px 10px; border-radius:999px; color:var(--text);
-  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.08));
-  border:1px solid var(--border);
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.chip {
+  font-size: .85rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(0, 0, 0, .08));
+  border: 1px solid var(--border);
 }
 
 /* ==== Hero ==== */
-.hero{
-  display:grid; grid-template-columns:96px 1fr; gap:16px; align-items:center; margin-bottom:26px;
+.hero {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 26px;
 }
-.hero .avatar{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
-  border:none;
-  box-shadow: var(--shadow);
-  transform: translate3d(0,0,0);
-  transition: transform 0.18s ease-out;
-  will-change: transform;
-}
+
 /* Animirani gradient prsten oko avatara */
 .avatar-ring {
   width: 96px;
@@ -108,12 +172,28 @@ a{color:inherit; text-decoration:none}
   align-items: center;
   justify-content: center;
   animation: avatarRingSpin 8s linear infinite;
-  box-shadow: 0 0 18px rgba(120,182,255,.5);
+  box-shadow: 0 0 18px rgba(120, 182, 255, .5);
+}
+
+.hero .avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: none;
+  box-shadow: var(--shadow);
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.18s ease-out;
+  will-change: transform;
 }
 
 @keyframes avatarRingSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Ako korisnik ne voli animacije (sistemski setting) – smiri prsten */
@@ -123,47 +203,187 @@ a{color:inherit; text-decoration:none}
     box-shadow: var(--shadow);
   }
 }
-.hero .hero-body .actions{margin-top:12px; display:flex; gap:8px}
+
+.hero .hero-body .actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+/* Hero tekst da ne ide preširoko na velikim ekranima */
+.hero .hero-body {
+  max-width: 520px;
+}
 
 /* ==== About ==== */
-.about{max-width:900px; margin:36px auto 28px; text-align:center; padding:0 6px}
+.about {
+  max-width: 900px;
+  margin: 36px auto 28px;
+  text-align: center;
+  padding: 0 6px;
+}
+
+/* Ljepši max-width teksta u About & Contact */
+.about p,
+.contact p {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* ==== Projects grid & cards ==== */
-.grid{
-  margin-top:8px;
-  display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+.projects {
+  margin-top: 32px;
 }
-@media (max-width: 900px){ .grid{grid-template-columns:1fr 1fr} }
-@media (max-width: 640px){ .grid{grid-template-columns:1fr} }
 
-.card{
-  background:var(--card); border:1px solid var(--border);
-  border-radius:18px; padding:18px; box-shadow: var(--shadow);
+/* Malo više prostora između glavnih sekcija */
+.about,
+.projects,
+.contact {
+  margin-bottom: 40px;
 }
-.card .actions{display:flex; gap:10px; margin-top:12px}
+
+.grid {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Hover animacija za project kartice */
+.card:hover,
+.card:focus-within {
+  transform: translateY(-6px) scale(1.02) !important; /* !important da pobijedi reveal transform */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Sakrij filtrirane kartice */
+.card[hidden] {
+  display: none;
+}
 
 /* ==== Contact ==== */
-.contact{margin-top:20px}
-.form .row{
-  display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:.5rem 0 12px;
+.contact {
+  margin-top: 20px;
 }
-@media (max-width:640px){ .form .row{grid-template-columns:1fr} }
-.form input,.form textarea{
-  width:100%; background:var(--card); color:var(--text);
-  border:1px solid var(--border); border-radius:14px; padding:12px 14px; outline:none;
+
+.form .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: .5rem 0 12px;
 }
-.form textarea{resize:vertical}
-.form .end{margin-top:12px; display:flex; gap:8px}
-.tip{margin-top:8px; color:var(--muted); font-size:.92rem}
+
+@media (max-width: 640px) {
+  .form .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+}
+
+.form textarea {
+  resize: vertical;
+}
+
+.form .end {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.tip {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: .92rem;
+}
 
 /* ==== Footer ==== */
-.foot{margin-top:32px}
-.muted{color:var(--muted)}
+.foot {
+  margin-top: 32px;
+}
+
+.muted {
+  color: var(--muted);
+}
 
 /* ==== Reveal (fade-in) ==== */
-.reveal{opacity:0; transform:translateY(20px); transition: all .7s ease-out}
-.reveal.visible{opacity:1; transform:translateY(0)}
-.topnav{
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Stagger reveal za kartice === */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+  transition-delay: var(--d, 0ms);
+}
+
+.reveal-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Stagger reveal za About chips === */
+.chip.reveal-chip {
+  opacity: 0;
+  transform: translateY(8px) scale(.98);
+  transition: opacity .45s ease, transform .45s ease;
+  transition-delay: var(--d, 0ms); /* setuje se iz JS-a */
+}
+
+.chip.reveal-chip.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==== Top nav (sticky) ==== */
+.topnav {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -222,92 +442,41 @@ a{color:inherit; text-decoration:none}
 .topnav a.active::after {
   transform: scaleX(1);
 }
-.to-top{
-  position: fixed; right: 16px; bottom: 16px; z-index: 999;
-  padding: 10px 12px; border-radius: 12px; border: 1px solid var(--card);
-  background: var(--card); color: var(--text); opacity: 0; pointer-events: none;
+
+/* ==== To-top button ==== */
+.to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 999;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--card);
+  background: var(--card);
+  color: var(--text);
+  opacity: 0;
+  pointer-events: none;
   transition: opacity .2s ease;
 }
-.to-top.show{ opacity: 1; pointer-events: auto; }
-/* === Cards: hover/focus lift === */
-/* Hover animacija za project kartice */
-.card {
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+.to-top.show {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-.card {
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* === Stagger reveal za kartice === */
-.reveal-item {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .6s ease, transform .6s ease;
-  transition-delay: var(--d, 0ms);
-}
-.reveal-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* === Stagger reveal za About chips === */
-.chip.reveal-chip {
-  opacity: 0;
-  transform: translateY(8px) scale(.98);
-  transition: opacity .45s ease, transform .45s ease;
-  transition-delay: var(--d, 0ms); /* setuje se iz JS-a */
-}
-.chip.reveal-chip.visible {
-  opacity: 1;
-  transform: none;
-}
 /* === Scroll progress bar === */
-#scrollProgress{
-  position: sticky; top: 0; left: 0; width: 100%;
-  height: 3px; background: linear-gradient(90deg, var(--accent) 0 0) no-repeat;
+#scrollProgress {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0 0) no-repeat;
   background-size: 0% 100%;
   z-index: 2000;
 }
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* === Projects section === */
-.projects {
-  margin-top: 32px;
-}
-/* Ljepši max-width teksta u About & Contact */
-.about p,
-.contact p {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Malo više prostora između glavnih sekcija */
-.about,
-.projects,
-.contact {
-  margin-bottom: 40px;
-}
-
-/* Hero tekst da ne ide preširoko na velikim ekranima */
-.hero .hero-body {
-  max-width: 520px;
-}
-
-/* Header + filteri */
+/* ==== Projects header & filter pills ==== */
 .projects-header {
   display: flex;
   justify-content: space-between;
@@ -315,11 +484,11 @@ a{color:inherit; text-decoration:none}
   gap: 12px;
   margin-bottom: 12px;
 }
+
 .projects-header h2 {
   margin: 0;
 }
 
-/* Filter pills */
 .project-filters {
   display: flex;
   flex-wrap: wrap;
@@ -334,30 +503,20 @@ a{color:inherit; text-decoration:none}
   color: var(--muted);
   font-size: 13px;
   cursor: pointer;
-  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .1s ease;
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    transform .1s ease;
 }
+
 .pill:hover {
   transform: translateY(-1px);
   color: var(--text);
 }
+
 .pill.active {
   background: var(--accent);
   color: #0b1726;
   border-color: var(--accent);
 }
-/* Sakrij filtrirane kartice */
-.card[hidden] {
-  display: none;
-}
-/* === FORCE card hover da pobijedi reveal transform === */
-.card:hover,
-.card:focus-within {
-  transform: translateY(-6px) scale(1.02) !important;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-
-
-
-
