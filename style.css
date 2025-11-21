@@ -131,6 +131,10 @@ a {
   padding: 6px 10px;
   font-size: 0.85rem;
 }
+.btn.small {
+  padding: 6px 10px;
+  font-size: 14px;
+}
 
 /* Theme toggle dugme u topnavu ide desno */
 .topnav #themeToggle {
