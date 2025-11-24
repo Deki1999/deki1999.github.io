@@ -548,3 +548,7 @@ a {
   color: #0b1726;
   border-color: var(--accent);
 }
+.card[data-tags~="crypto"] {
+  border: 1px solid rgba(255, 200, 0, 0.35);
+  box-shadow: 0 0 14px rgba(255, 200, 0, 0.12);
+}
