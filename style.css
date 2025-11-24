@@ -552,3 +552,6 @@ a {
   border: 1px solid rgba(255, 200, 0, 0.35);
   box-shadow: 0 0 14px rgba(255, 200, 0, 0.12);
 }
+.extra-space {
+  margin-top: 32px; /* možeš i 24px ako želiš manje */
+}
