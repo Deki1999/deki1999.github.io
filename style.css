@@ -555,3 +555,10 @@ a {
 .extra-space {
   margin-top: 32px; /* možeš i 24px ako želiš manje */
 }
+.project-thumb {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
