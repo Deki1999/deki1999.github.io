@@ -1,4 +1,96 @@
 /* =====================================================
+   PROJECT DATA
+===================================================== */
+const projects = [
+  {
+    title: "Typing Test",
+    tags: ["ui", "typing"],
+    img: "img/projects/typing-test.png",
+    description:
+      "Live WPM & accuracy, 10/30/60s, pause/resume, progress bar, sound toggle.",
+    liveUrl: "https://deki1999.github.io/typing-test/",
+    codeUrl: "https://github.com/Deki1999/typing-test",
+  },
+  {
+    title: "Weather App",
+    tags: ["api", "ui"],
+    img: "img/projects/weather-app.png",
+    description:
+      "Open-Meteo API, geolocation & search, icons, °C/°F toggle, 24h chart.",
+    liveUrl: "https://deki1999.github.io/weather-app/",
+    codeUrl: "https://github.com/Deki1999/weather-app",
+  },
+  {
+    title: "To-Do App",
+    tags: ["ui", "storage"],
+    img: "img/projects/to-do-app.png",
+    description: "Tasks, filters, inline edit, localStorage.",
+    liveUrl: "https://deki1999.github.io/todo-pro/",
+    codeUrl: "https://github.com/Deki1999/todo-pro",
+  },
+  {
+    title: "Pomodoro Timer",
+    tags: ["ui"],
+    img: "img/projects/pomodoro-timer.png",
+    description: "Focus/break cycles with auto-start, progress bar and daily stats.",
+    liveUrl: "https://deki1999.github.io/pomodoro-app/",
+    codeUrl: "https://github.com/Deki1999/pomodoro-app",
+  },
+  {
+    title: "Notes App",
+    tags: ["storage", "ui"],
+    img: "img/projects/notes-app.png",
+    description:
+      "LocalStorage persistence, search, pin, delete, responsive layout.",
+    liveUrl: "https://deki1999.github.io/notes-app/",
+    codeUrl: "https://github.com/Deki1999/notes-app",
+  },
+  {
+    title: "Password Generator",
+    tags: ["ui"],
+    img: "img/projects/password-generator.png",
+    description:
+      "Create strong random passwords with length slider, character options, strength indicator and copy to clipboard.",
+    liveUrl: "https://deki1999.github.io/password-generator/",
+    codeUrl: "https://github.com/Deki1999/password-generator",
+  },
+  {
+    title: "Movie Search App",
+    tags: ["api", "ui"],
+    img: "img/projects/movie-search.png",
+    description:
+      "Search any movie using the OMDb API — with posters, ratings and clean, simple UI.",
+    liveUrl: "https://deki1999.github.io/movie-search/",
+    codeUrl: "https://github.com/Deki1999/movie-search",
+  },
+  {
+    title: "Dictionary App",
+    tags: ["api", "ui"],
+    img: "img/projects/dictionary.png",
+    description:
+      "Search English definitions, examples and synonyms using the Free Dictionary API.",
+    liveUrl: "https://deki1999.github.io/dictionary-app/",
+    codeUrl: "https://github.com/Deki1999/dictionary-app",
+  },
+  {
+    title: "Expense Tracker",
+    tags: ["ui", "storage"],
+    img: "img/projects/expense-tracker.png",
+    description: "Track daily expenses, categories, monthly totals and charts.",
+    liveUrl: "https://deki1999.github.io/expense-tracker/",
+    codeUrl: "https://github.com/Deki1999/expense-tracker",
+  },
+  {
+    title: "🔶 Crypto Tracker",
+    tags: ["api", "crypto"],
+    img: "img/projects/crypto-tracker.png",
+    description: "Real-time crypto prices, coin search, auto-refresh, clean UI.",
+    liveUrl: "https://deki1999.github.io/crypto-tracker/",
+    codeUrl: "https://github.com/Deki1999/crypto-tracker",
+  },
+];
+
+/* =====================================================
    THEME AUTO-APPLY (no button)
 ===================================================== */
 (function () {
@@ -104,6 +196,43 @@
   );
 
   sections.forEach((sec) => observer.observe(sec));
+})();
+
+/* =====================================================
+   RENDER PROJECT CARDS FROM DATA
+===================================================== */
+(function () {
+  const section = document.getElementById("projects");
+  if (!section) return;
+
+  const grid = section.querySelector(".grid");
+  if (!grid || !Array.isArray(projects)) return;
+
+  grid.innerHTML = projects
+    .map((p) => {
+      const tags = (p.tags || []).join(" ");
+      return `
+        <article class="card" data-tags="${tags}">
+          <img
+            src="${p.img}"
+            alt="${p.title} thumbnail"
+            class="project-thumb"
+            loading="lazy"
+          />
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <div class="actions">
+            <a class="btn" href="${p.liveUrl}" target="_blank" rel="noreferrer noopener">
+              Live
+            </a>
+            <a class="btn ghost" href="${p.codeUrl}" target="_blank" rel="noreferrer noopener">
+              Code
+            </a>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
 })();
 
 /* =====================================================
