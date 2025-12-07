@@ -91,7 +91,7 @@ const projects = [
   {
   title: "Personal Dashboard",
   tags: ["ui", "storage"],
-  img: "img/projects/movie-search.png", 
+  img: "img/projects/personal-dashboard.svg", 
   description: "Tasks, notes, focus timer and weather in one clean dashboard.",
   liveUrl: "https://deki1999.github.io/personal-dashboard/",
   codeUrl: "https://github.com/Deki1999/personal-dashboard",
